@@ -3,10 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import heroSteelWarehouse from "@/assets/images/hero-steel-warehouse.png.asset.json";
-import heroSteelRebar from "@/assets/images/hero-steel-rebar.png.asset.json";
-import heroSteelWire from "@/assets/images/hero-steel-wire.png.asset.json";
-import heroTmtSteel from "@/assets/images/hero-tmt-steel.png.asset.json";
+
 
 interface HeroImage {
   url: string;
@@ -19,35 +16,43 @@ interface HeroImage {
 
 const HERO_IMAGES: HeroImage[] = [
   {
-    url: heroSteelWarehouse.url,
-    alt: "Industrial steel rebar warehouse with high-quality stock",
-    position: {
-      desktop: "center center",
-      mobile: "center center"
-    }
-  },
-  {
-    url: heroSteelWire.url,
-    alt: "Industrial steel wire coils in distribution center",
+    url: "/hero/hero-1.jpg",
+    alt: "High-quality industrial steel wire coils in distribution center",
     position: {
       desktop: "center center",
       mobile: "45% center"
     }
   },
   {
-    url: heroTmtSteel.url,
-    alt: "Close-up cinematic shot of TMT 550D steel rebar stacked",
+    url: "/hero/hero-2.jpg",
+    alt: "Premium bundles of ribbed TMT reinforcement steel bars",
+    position: {
+      desktop: "center center",
+      mobile: "center center"
+    }
+  },
+  {
+    url: "/hero/hero-3.jpg",
+    alt: "Industrial steel manufacturing facility with wire coils",
     position: {
       desktop: "center center",
       mobile: "40% center"
     }
   },
   {
-    url: heroSteelRebar.url,
-    alt: "Premium bundles of ribbed TMT reinforcement steel bars",
+    url: "/hero/hero-4.jpg",
+    alt: "Heavy duty TMT steel rebar stock ready for distribution",
     position: {
       desktop: "center center",
       mobile: "65% center"
+    }
+  },
+  {
+    url: "/hero/hero-5.jpg",
+    alt: "Extensive inventory of premium quality steel rebar coils",
+    position: {
+      desktop: "center center",
+      mobile: "50% center"
     }
   }
 ];
@@ -110,7 +115,7 @@ export const HeroSection = () => {
   );
 
   return (
-    <section className="relative w-full bg-ssc-navy pt-0 lg:h-[calc(100vh-72px)] min-h-[600px] lg:min-h-[700px] flex items-center overflow-hidden">
+    <section className="relative w-full bg-ssc-navy pt-0 h-[100dvh] flex items-center overflow-hidden">
       {/* Full-Screen, Full-Width Hero Background (Full Bleed Carousel) */}
       <div className="absolute inset-0 z-0">
         {imageElement}
@@ -119,18 +124,19 @@ export const HeroSection = () => {
         <div 
           className="absolute inset-0 z-10" 
           style={{
-            background: 'linear-gradient(90deg, rgba(11,19,32,0.9) 0%, rgba(11,19,32,0.6) 40%, rgba(11,19,32,0.1) 100%)'
+            background: 'linear-gradient(90deg, rgba(11,19,32,0.95) 0%, rgba(11,19,32,0.7) 50%, rgba(11,19,32,0.2) 100%)'
           }} 
           />
         {/* Bottom Fade for section transition */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ssc-navy to-transparent z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 lg:h-32 bg-gradient-to-t from-ssc-navy to-transparent z-10 pointer-events-none" />
       </div>
 
       <div className="container-ssc relative z-20 h-full">
-        <div className="flex flex-col lg:flex-row items-center h-full pt-[80px] sm:pt-[90px] lg:pt-0">
+        {/* Mobile: justify-center to balance vertical space. Desktop: exactly as before (pt-[120px]) */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center lg:justify-start h-full pt-[60px] lg:pt-[120px] pb-[40px] lg:pb-0">
           
-          {/* Content Area: Left 45% Width on Desktop */}
-          <div className="w-full lg:w-[45%] flex flex-col justify-center py-16 lg:py-12 lg:px-0 relative">
+          {/* Content Area */}
+          <div className="w-full lg:w-[50%] flex flex-col justify-center relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -138,41 +144,39 @@ export const HeroSection = () => {
               className="max-w-[650px]"
             >
               {/* Eyebrow Label */}
-              <div className="flex items-center gap-3 mb-5 lg:mb-7">
-                <span className="text-micro text-white/80">
+              <div className="flex items-center gap-3 mb-3 sm:mb-4 lg:mb-6">
+                <span className="text-[9px] sm:text-[10px] lg:text-[12px] text-white/80 tracking-widest font-semibold uppercase">
                   ENGINEERED FOR STRENGTH
                 </span>
                 <span className="text-white/20">—</span>
-                <span className="text-micro text-ssc-gold-dark">
+                <span className="text-[9px] sm:text-[10px] lg:text-[12px] text-ssc-gold-dark tracking-widest font-semibold uppercase">
                   EST. 1994
                 </span>
               </div>
               
-              {/* Headline */}
-              <h1 className="text-white mb-7 lg:mb-10 leading-[1.1]">
-                <span className="block mb-1">BUILDING</span>
-                <span className="block mb-1">STRENGTH.</span>
-                <span className="block">
-                  SHAPING <span className="text-ssc-gold">TOMORROW.</span>
-                </span>
+              {/* Headline - Controlled font size for mobile, exact same for desktop */}
+              <h1 className="text-[38px] sm:text-[46px] lg:text-[72px] font-black text-white mb-4 lg:mb-7 leading-[1.0] lg:leading-[0.95] tracking-tight">
+                BUILDING<br />
+                STRENGTH.<br />
+                SHAPING <span className="text-ssc-gold">TOMORROW.</span>
               </h1>
               
               {/* Description */}
-              <p className="text-body-large text-white/80 max-w-[500px] mb-8 lg:mb-12">
+              <p className="text-[14px] sm:text-[15px] lg:text-[18px] text-white/80 max-w-[480px] mb-6 sm:mb-8 lg:mb-10 leading-snug">
                 Engineered steel products for construction and industrial requirements. Reliable supply across Andhra Pradesh since 1994.
               </p>
               
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 items-stretch sm:items-start">
-                <Link to="/products">
-                  <Button className="w-full sm:w-auto bg-ssc-gold text-ssc-navy hover:bg-ssc-gold/90 border-none">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start w-full sm:w-auto">
+                <Link to="/products" className="w-full sm:w-auto">
+                  <Button className="w-full bg-ssc-gold text-ssc-navy hover:bg-ssc-gold/90 border-none h-12 lg:h-14 px-8 font-semibold">
                     EXPLORE PRODUCTS <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
-                <Link to="/contact" search={{ product: "" }}>
+                <Link to="/contact" search={{ product: "" }} className="w-full sm:w-auto">
                   <Button
                     variant="outline"
-                    className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10"
+                    className="w-full border-white/30 text-white hover:bg-white/10 h-12 lg:h-14 px-8 font-semibold"
                   >
                     GET A QUOTE
                   </Button>

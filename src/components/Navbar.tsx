@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ArrowRight, X, Home, Info, ShoppingBag, Image as ImageIcon, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-const sscLogo = { url: "/logo.png" };
+const sscLogo = { url: "/logo.svg" };
 import steelIconsAssetV2 from "@/assets/steel-nav-icons-v2.png.asset.json";
 
 export const Navbar = () => {
@@ -73,68 +73,53 @@ export const Navbar = () => {
     >
       {/* Premium Engineered Steel Header Panel - Unified Global Design */}
       <div className={`
-        relative mx-auto w-full md:max-w-[94%] lg:max-w-[1280px] flex items-center justify-between px-4 sm:px-6 md:px-8
+        relative mx-auto w-full md:max-w-[94%] lg:max-w-[1360px] flex items-center justify-between px-4 sm:px-6 md:px-8
         transition-all duration-500 ease-in-out pointer-events-auto
         ${scrolled 
-          ? "h-[62px] sm:h-[68px] md:h-[72px] shadow-[0_12px_40px_rgba(0,0,0,0.3)]" 
-          : "h-[62px] sm:h-[68px] md:h-[72px] shadow-[0_12px_40px_rgba(0,0,0,0.3)]"
+          ? "h-[60px] sm:h-[68px] md:h-[76px] shadow-[0_12px_40px_rgba(0,0,0,0.3)]" 
+          : "h-[60px] sm:h-[68px] md:h-[76px] shadow-[0_12px_40px_rgba(0,0,0,0.3)]"
         }
-        rounded-[12px] overflow-hidden border border-white/40
-
+        rounded-[12px] border border-white/40
       `}>
-        {/* Brushed Silver / Aluminium Surface */}
-        <div className="absolute inset-0 bg-ssc-steel-light" />
-        
-        {/* Realistic Metal Texture (Brushed) */}
+        {/* Background Wrapper with Overflow Hidden for rounded corners */}
+        <div className="absolute inset-0 rounded-[12px] overflow-hidden pointer-events-none z-[0]">
+        {/* User Provided Header Background */}
         <div 
-          className="absolute inset-0 opacity-[0.35] pointer-events-none z-[1]" 
+          className="absolute inset-0 z-[1]" 
           style={{ 
-            backgroundImage: `url('https://www.transparenttextures.com/patterns/brushed-alum.png')`,
-            backgroundSize: '300px 300px',
-            filter: 'contrast(1.1)'
+            backgroundImage: `url('/headerbars.png')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'right center',
+            backgroundRepeat: 'no-repeat'
           }} 
         />
-
-        {/* Integrated TMT Rebar Imagery - Visual Specification */}
-        <div 
-          className="absolute inset-0 opacity-[0.12] mix-blend-multiply pointer-events-none grayscale z-[2]"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=1200&auto=format&fit=crop')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center right',
-            filter: 'contrast(1.2) brightness(0.9)'
-          }}
-        />
-        
-        {/* Premium Highlights & Tonal Depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-black/10 pointer-events-none z-[3]" />
         
         {/* Refined Metallic Bevel Edge */}
-        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-white/95 pointer-events-none z-[4]" />
-        <div className="absolute bottom-0 left-0 right-0 h-[1.2px] bg-black/20 pointer-events-none z-[4]" />
+        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-white/80 z-[4]" />
+        <div className="absolute bottom-0 left-0 right-0 h-[1.2px] bg-black/20 z-[4]" />
+        </div>
 
         {/* Logo & Brand Section */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative z-10 py-2">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative z-10">
           <Link 
             to="/" 
-            className="flex items-center gap-2 sm:gap-4 relative group shrink-0 cursor-pointer"
+            className="flex items-center gap-1 sm:gap-2 relative group shrink-0 cursor-pointer"
           >
-            <div className="h-9 w-9 sm:h-12 sm:w-12 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+            <div className="h-[80px] w-[80px] sm:h-[92px] sm:w-[92px] shrink-0 drop-shadow-md bg-transparent relative z-10 flex items-center justify-center">
               <img
                 src={sscLogo.url}
                 alt="SSC Logo"
-                className="h-full w-full object-contain opacity-95 filter brightness-[0.9]"
+                className="h-full w-full object-contain mix-blend-screen"
               />
             </div>
             
-            {/* Metallic Vertical Divider */}
-            <div className="w-[1px] h-7 sm:h-10 bg-ssc-navy/20 shadow-[0.5px_0_0_rgba(255,255,255,0.6)]" />
+            {/* Removed vertical divider to reduce space as requested */}
 
             <div className="flex flex-col justify-center">
-              <span className="text-h4 font-bold text-ssc-navy leading-none uppercase">
+              <span className="text-[17px] sm:text-[24px] font-bold text-ssc-navy leading-none uppercase tracking-tight">
                 SRINIVASA <span className="font-bold">STEEL</span>
               </span>
-              <span className="text-micro text-ssc-gold-dark leading-none mt-1 uppercase drop-shadow-sm">
+              <span className="text-[10px] sm:text-[13px] text-ssc-gold-dark leading-none mt-1 uppercase drop-shadow-sm font-semibold tracking-widest">
                 CORPORATION
               </span>
             </div>
@@ -143,28 +128,34 @@ export const Navbar = () => {
 
         {/* Navigation & CTA Section */}
         <div className="flex items-center gap-4 xl:gap-10 relative z-10">
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-5 lg:gap-8 xl:gap-10">
+          {/* Desktop Navigation Links - Unified Surface */}
+          <div className="hidden md:flex items-center px-2 py-1.5 bg-[#0B1320]/80 backdrop-blur-md border border-white/20 rounded-[10px] shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
             {navLinks.map((link, i) => {
               const isActive = location.pathname === link.href;
               return (
-                <motion.div key={link.name} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 * i }}>
-                  <Link
-                    to={link.href}
-                    activeOptions={{ exact: link.href === '/' }}
-                    className={`relative text-micro transition-all py-2 whitespace-nowrap cursor-pointer ${
-                      isActive ? "text-ssc-navy" : "text-ssc-navy/70 hover:text-ssc-navy"
-                    }`}
-                  >
-                    {link.name}
-                    {isActive && (
-                      <motion.div 
-                        layoutId="activeNav"
-                        className="absolute -bottom-1 left-0 right-0 h-[2px] bg-ssc-gold rounded-full shadow-[0_1px_3px_rgba(212,175,55,0.3)]"
-                      />
-                    )}
-                  </Link>
-                </motion.div>
+                <div key={link.name} className="flex items-center">
+                  {i > 0 && <div className="h-5 w-[1px] bg-white/20 mx-1" />}
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 * i }}>
+                    <Link
+                      to={link.href}
+                      activeOptions={{ exact: link.href === '/' }}
+                      className={`relative text-micro transition-all duration-300 py-1.5 px-4 rounded-[6px] whitespace-nowrap cursor-pointer flex items-center justify-center gap-2 ${
+                        isActive 
+                          ? "text-white font-medium bg-white/10 shadow-inner" 
+                          : "text-white/80 hover:text-white hover:bg-white/10 hover:-translate-y-[1px] hover:shadow-[0_2px_8px_rgba(0,0,0,0.2)]"
+                      }`}
+                    >
+                      <link.Icon size={16} className={isActive ? "text-ssc-gold" : "text-ssc-gold/80"} strokeWidth={2} />
+                      <span className="tracking-wide">{link.name}</span>
+                      {isActive && (
+                        <motion.div 
+                          layoutId="activeNav"
+                          className="absolute -bottom-1 left-4 right-4 h-[2px] bg-ssc-gold rounded-full shadow-[0_1px_3px_rgba(212,175,55,0.3)]"
+                        />
+                      )}
+                    </Link>
+                  </motion.div>
+                </div>
               );
             })}
           </div>
@@ -189,16 +180,16 @@ export const Navbar = () => {
             type="button"
           >
             <div className={`
-              relative w-11 h-10 sm:w-13 sm:h-12 rounded-[12px]
+              relative w-11 h-10 sm:w-13 sm:h-12 rounded-[6px]
               flex flex-col items-center justify-center
               transition-all duration-300
               ${isOpen ? 'rotate-90' : 'hover:-translate-y-[1px] active:translate-y-[0.5px]'}
-              bg-gradient-to-b from-[#F2D7A5] via-ssc-gold to-ssc-gold-dark
-              shadow-premium-medium
-              border border-ssc-gold-dark/40
+              bg-gradient-to-b from-[#e1b35b] via-[#c29640] to-[#9a7024]
+              shadow-[inset_0_1px_1px_rgba(255,255,255,0.6),0_4px_6px_rgba(0,0,0,0.4)]
+              border border-[#845b14]
             `}>
               {/* Machined Bevel Inset */}
-              <div className="absolute inset-[1.5px] rounded-[10.5px] border border-white/30 pointer-events-none" />
+              <div className="absolute inset-[1px] rounded-[5px] border border-white/20 pointer-events-none" />
               
               <AnimatePresence mode="wait">
                 {!isOpen ? (
@@ -207,11 +198,11 @@ export const Navbar = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
-                    className="flex flex-col gap-[4px]"
+                    className="flex flex-col gap-[5px]"
                   >
-                    <span className="w-5 h-[2px] bg-ssc-navy rounded-full block shadow-[0_0.5px_1px_rgba(255,255,255,0.3)]" />
-                    <span className="w-5 h-[2px] bg-ssc-navy rounded-full block shadow-[0_0.5px_1px_rgba(255,255,255,0.3)]" />
-                    <span className="w-5 h-[2px] bg-ssc-navy rounded-full block shadow-[0_0.5px_1px_rgba(255,255,255,0.3)]" />
+                    <span className="w-[22px] h-[2px] bg-[#111] rounded-full block" />
+                    <span className="w-[22px] h-[2px] bg-[#111] rounded-full block" />
+                    <span className="w-[22px] h-[2px] bg-[#111] rounded-full block" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -233,22 +224,30 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as any }}
-            className="fixed inset-0 z-[110] bg-[#0B1320] flex flex-col pointer-events-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-0 z-[110] bg-[#f8f9fa] flex flex-col pointer-events-auto"
           >
-            {/* Overlay Header Mirror */}
-            <div className="h-[68px] sm:h-[78px] w-full flex items-center justify-between px-4 sm:px-8 bg-[#0B1320] relative border-b border-white/5 shrink-0">
-              <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2 sm:gap-4 relative z-10 cursor-pointer">
-                <div className="h-8 w-8 sm:h-12 sm:w-12">
-                  <img src={sscLogo.url} alt="SSC" className="h-full w-full object-contain filter brightness-110" />
+            {/* Subtle Hexagonal Background Pattern */}
+            <div 
+              className="absolute inset-0 opacity-[0.03] pointer-events-none z-[0]" 
+              style={{ 
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='28' height='49' viewBox='0 0 28 49' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E")`,
+                backgroundSize: '40px'
+              }} 
+            />
+
+            {/* Overlay Header */}
+            <div className="h-[90px] w-full flex items-center justify-between px-6 relative z-10 shrink-0">
+              <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2 cursor-pointer">
+                <div className="h-[60px] w-[60px] flex items-center justify-center shrink-0">
+                  <img src={sscLogo.url} alt="SSC" className="h-full w-full object-contain" />
                 </div>
-                <div className="w-[1px] h-6 sm:h-10 bg-white/20" />
-                <div className="flex flex-col text-left">
-                  <span className="text-h4 font-bold text-white uppercase leading-none">SRINIVASA STEEL</span>
-                  <span className="text-micro text-ssc-gold uppercase mt-1">CORPORATION</span>
+                <div className="flex flex-col text-left justify-center pt-1">
+                  <span className="text-[17px] font-black text-ssc-navy uppercase leading-none tracking-tight">SRINIVASA STEEL</span>
+                  <span className="text-[10px] text-ssc-gold-dark uppercase mt-1 tracking-widest font-bold">CORPORATION</span>
                 </div>
               </Link>
 
@@ -256,25 +255,22 @@ export const Navbar = () => {
               <button 
                 onClick={() => setIsOpen(false)}
                 type="button"
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-sm relative z-10 cursor-pointer"
+                className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors shadow-sm relative z-10 cursor-pointer"
               >
-                <X className="text-white w-5 h-5" strokeWidth={2} />
+                <X className="text-[#333] w-5 h-5" strokeWidth={2} />
               </button>
             </div>
 
-            {/* Content Area with White Engineering Grid */}
-            <div className="flex-1 relative overflow-hidden bg-[#0B1320]">
-              <div 
-                className="absolute inset-0 opacity-[0.05] pointer-events-none z-[1]" 
-                style={{ 
-                  backgroundImage: `linear-gradient(to right, #D4AF37 0.05px, transparent 1px), linear-gradient(to bottom, #D4AF37 0.05px, transparent 1px)`,
-                  backgroundSize: '40px 40px'
-                }} 
-              />
+            {/* Content Area */}
+            <div className="flex-1 relative flex flex-col px-8">
               
               {/* Navigation Items */}
-              <div className="relative z-10 h-full flex flex-col py-6 px-8 overflow-y-auto">
-                <div className="flex flex-col gap-1">
+              <div className="relative z-10 flex-1 flex flex-col justify-center py-6 max-h-[450px]">
+                
+                <div className="flex flex-col gap-6 relative z-10 h-full justify-center">
+                  {/* Vertical Gold Line connecting items */}
+                  <div className="absolute left-[23.5px] top-[24px] bottom-[24px] w-[1px] bg-ssc-gold/40 z-[-1]" />
+
                   {navLinks.map((link, i) => {
                     const isActive = location.pathname === link.href;
                     return (
@@ -288,46 +284,34 @@ export const Navbar = () => {
                           to={link.href}
                           onClick={() => setIsOpen(false)}
                           activeOptions={{ exact: link.href === '/' }}
-                          className={`group flex items-center gap-6 py-3 cursor-pointer transition-all duration-300 ${
-                            isActive ? "translate-x-1" : "hover:translate-x-1"
-                          }`}
+                          className={`group flex items-center gap-6 cursor-pointer`}
                         >
-                          {/* Premium 3D Circular Navigation Icons - Engineered Industrial Style */}
-                          <div className="w-12 h-12 flex items-center justify-center shrink-0 relative group/icon">
-                            {/* Machined Metallic Circular Base */}
-                            <div className={`
-                              absolute inset-0 rounded-full
-                              bg-gradient-to-br from-ssc-navy via-[#1e2a3a] to-black
-                              border-[1.5px] transition-all duration-300
-                              ${isActive 
-                                ? "border-ssc-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] scale-105" 
-                                : "border-ssc-gold/30 shadow-lg group-hover/icon:border-ssc-gold/60 group-hover/icon:scale-105"
-                              }
-                            `} />
-                            
-                            {/* Inner Metallic Highlight */}
-                            <div className="absolute inset-[2px] rounded-full border border-white/5 pointer-events-none" />
-                            
-                            {/* Icon Component */}
+                          {/* Circular Icon */}
+                          <div className={`
+                            w-12 h-12 flex items-center justify-center rounded-full shrink-0 relative
+                            border-[1.5px] transition-all duration-300 z-10
+                            ${isActive 
+                              ? "border-[#d5a53a] bg-[#d5a53a] shadow-[0_4px_12px_rgba(212,175,55,0.3)]" 
+                              : "border-gray-300 bg-[#f8f9fa] group-hover:border-ssc-gold/50"
+                            }
+                          `}>
                             <link.Icon 
                               size={20} 
-                              className={`relative z-10 transition-all duration-300 ${
-                                isActive ? "text-ssc-gold scale-110" : "text-ssc-gold/70 group-hover/icon:text-ssc-gold group-hover/icon:scale-110"
-                              }`}
-                              strokeWidth={1.5}
+                              className={isActive ? "text-white" : "text-[#333]"}
+                              strokeWidth={isActive ? 2 : 1.5}
                             />
                           </div>
                           
-                          <div className="flex flex-col justify-center">
-                            <span className={`text-body font-bold tracking-wide transition-colors uppercase leading-none ${
-                              isActive ? "text-ssc-gold-dark" : "text-white group-hover:text-ssc-gold-dark"
+                          <div className="flex flex-col justify-center pt-1">
+                            <span className={`text-[15px] font-bold tracking-wider uppercase leading-none ${
+                              isActive ? "text-ssc-navy" : "text-ssc-navy/80"
                             }`}>
                               {link.name}
                             </span>
                             {isActive && (
                               <motion.div 
                                 layoutId="mobileActiveUnderline"
-                                className="h-[2px] mt-1.5 w-full bg-ssc-gold shadow-[0_1px_3px_rgba(212,175,55,0.3)]"
+                                className="h-[2px] mt-1.5 w-[80%] bg-[#d5a53a]"
                               />
                             )}
                           </div>
@@ -336,28 +320,41 @@ export const Navbar = () => {
                     );
                   })}
                 </div>
+              </div>
 
-                {/* GET A QUOTE Button */}
+              {/* Bottom Section: CTA */}
+              <div className="relative z-20 pb-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
-                  className="mt-8 mb-10"
                 >
                   <Link to="/contact" search={{ product: "" }} onClick={() => setIsOpen(false)}>
-                    <Button className="w-full h-[54px] text-small font-bold 
-                                     bg-ssc-gold text-ssc-navy hover:bg-ssc-gold/90 rounded-xl shadow-premium-medium border-b-4 border-ssc-gold-dark active:border-b-0 active:translate-y-1 transition-all uppercase">
+                    <Button className="w-full h-[54px] text-[15px] font-bold 
+                                     bg-[#d5a53a] text-ssc-navy hover:bg-[#d5a53a]/90 rounded-xl shadow-[0_6px_16px_rgba(212,175,55,0.25)] transition-all uppercase border-none">
                       GET A QUOTE <ArrowRight size={18} className="ml-2" />
                     </Button>
                   </Link>
                 </motion.div>
-                
-                {/* Precision Built Label */}
-                <div className="mt-auto pb-4 flex items-center justify-between opacity-50">
-                  <span className="text-[8px] font-body tracking-[0.2em] uppercase text-white">PRECISION BUILT</span>
-                  <span className="text-[8px] font-body tracking-[0.2em] uppercase text-white">VER 2.4.0</span>
-                </div>
               </div>
+
+            </div>
+            
+            {/* Decorative Diagonal Steel Image at bottom right */}
+            <div className="absolute bottom-0 left-0 right-0 h-[220px] z-[5] pointer-events-none overflow-hidden">
+              <motion.div 
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ 
+                  backgroundImage: `url('/mobile-menu-steel.jpg')`,
+                  clipPath: 'polygon(15% 100%, 100% 100%, 100% 30%)',
+                }}
+              />
+              <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                <line x1="15%" y1="100%" x2="100%" y2="30%" stroke="#D4AF37" strokeWidth="3" />
+              </svg>
             </div>
           </motion.div>
         )}

@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import sscLogo from "@/assets/ssc-logo-transparent.png.asset.json";
-import sscLogo3D from "@/assets/ssc-logo-3d.png.asset.json";
+const sscLogo = { url: "/logo.svg" };
+const sscLogo3D = { url: "/logo.svg" };
 
 // @ts-ignore
 import rebarCoils from "@/assets/rebar-coils.jpg.asset.json";
@@ -51,8 +51,8 @@ export const BrandPreloader = ({ onComplete, showIntro = true }: PreloaderProps)
     // Progress animation (approx 4.5s total)
     // 0.8s to start, finishes around 4.3s
     const startTime = Date.now();
-    const duration = 3500; // 3.5 seconds for the actual bar growth
-    const delay = 800; // start after 0.8s
+    const duration = 800;
+    const delay = 200;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -62,7 +62,7 @@ export const BrandPreloader = ({ onComplete, showIntro = true }: PreloaderProps)
         const p = Math.min(100, ((elapsed - delay) / duration) * 100);
         setProgress(p);
         
-        if (elapsed >= 4500) {
+        if (elapsed >= 1000) {
           clearInterval(interval);
           setTimeout(() => {
             setIsVisible(false);
@@ -97,12 +97,12 @@ export const BrandPreloader = ({ onComplete, showIntro = true }: PreloaderProps)
                 duration: 1.2, 
                 ease: [0.16, 1, 0.3, 1] 
               }}
-              className="w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] flex items-center justify-center mb-8"
+              className="w-[130px] h-[130px] sm:w-[190px] sm:h-[190px] flex items-center justify-center mb-8"
             >
               <img
                 src={sscLogo.url}
                 alt="SSC Logo"
-                className="w-full h-full object-contain filter brightness-0 invert"
+                className="w-full h-full object-contain"
               />
             </motion.div>
 

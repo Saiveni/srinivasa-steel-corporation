@@ -8,17 +8,17 @@ export const BrandStrip = () => {
   const brands = [
     { 
       name: "VIZAG STEEL", 
-      logo: vizagAsset.url, 
+      logo: "/partners/vizag-steel.png", 
       subtitle: "MOU DEALER" 
     },
     { 
       name: "JINDAL PANTHER", 
-      logo: jindalAsset.url, 
+      logo: "/partners/jindal-panther.png", 
       subtitle: "TMT REBARS DEALER" 
     },
     { 
       name: "SIMHADRI TMT", 
-      logo: simhadriAsset.url, 
+      logo: "/partners/simhadri-tmt.png", 
       subtitle: "SUPPLY PARTNER" 
     }
   ];

@@ -85,7 +85,12 @@ const businessAreas = [
     code: "CORP-MOU",
     title: "STRATEGIC PARTNERSHIPS",
     description: "Our authorized strategic partnerships with India's leading steel manufacturers—Vizag Steel, Jindal Panther, and Simhadri TMT—ensure a robust and reliable supply chain.",
-    image: vizagAsset.url,
+    image: "", // Not used when logos are present
+    logos: [
+      "/partners/vizag-steel.png",
+      "/partners/jindal-panther.png",
+      "/partners/simhadri-tmt.png"
+    ],
     alt: "Strategic Partnerships with Vizag Steel, Jindal Panther, and Simhadri TMT",
     meta: [
       { label: "PARTNERS", value: "TOP TIER" },
@@ -106,7 +111,7 @@ const businessAreas = [
   }
 ];
 
-const SpecCard = ({ area, index }: { area: typeof businessAreas[0], index: number }) => {
+const SpecCard = ({ area, index }: { area: typeof businessAreas[0] & { logos?: string[] }, index: number }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -121,26 +126,38 @@ const SpecCard = ({ area, index }: { area: typeof businessAreas[0], index: numbe
         {/* Brushed Metal Texture */}
         <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] pointer-events-none z-10" />
 
-        {/* Image Area */}
-        <div className="relative h-[160px] sm:h-[180px] lg:h-[240px] overflow-hidden shrink-0">
-          <img
-            src={area.image}
-            alt={area.alt}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-1000 ease-out lg:group-hover:scale-108"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-ssc-steel-dark via-transparent to-transparent" />
+        {/* Image / Logos Area */}
+        <div className="relative h-[160px] sm:h-[180px] lg:h-[240px] overflow-hidden shrink-0 bg-white">
+          {area.logos ? (
+            <div className="w-full h-full flex items-center justify-center gap-4 px-4 bg-white">
+              {area.logos.map((logo, idx) => (
+                <div key={idx} className="flex-1 flex items-center justify-center h-full max-h-[100px]">
+                  <img src={logo} alt={`Partner logo ${idx + 1}`} className="max-w-full max-h-full object-contain" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <img
+                src={area.image}
+                alt={area.alt}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-1000 ease-out lg:group-hover:scale-108"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ssc-steel-dark via-transparent to-transparent" />
+            </>
+          )}
 
           {/* Index Chip */}
-          <div className="absolute top-3 left-3 flex items-center gap-2 bg-ssc-navy/70 backdrop-blur-md border border-ssc-on-dark-primary/10 rounded-full px-2 py-1 lg:group-hover:border-ssc-gold/40 transition-colors duration-500">
+          <div className="absolute top-3 left-3 flex items-center gap-2 bg-ssc-navy/70 backdrop-blur-md border border-ssc-on-dark-primary/10 rounded-full px-2 py-1 lg:group-hover:border-ssc-gold/40 transition-colors duration-500 z-20">
             <span className="text-ssc-gold text-[10px] lg:text-micro">
               {area.index}
             </span>
           </div>
 
           {/* Technical Code */}
-          <div className="absolute top-3 right-3">
-            <span className="text-ssc-on-dark-primary/40 text-[10px] lg:text-micro lg:group-hover:text-ssc-gold/70 transition-colors duration-500">
+          <div className="absolute top-3 right-3 z-20">
+            <span className="text-ssc-on-dark-primary/40 text-[10px] lg:text-micro lg:group-hover:text-ssc-gold/70 transition-colors duration-500 mix-blend-difference">
               {area.code}
             </span>
           </div>

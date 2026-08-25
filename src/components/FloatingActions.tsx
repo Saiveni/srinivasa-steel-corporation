@@ -26,22 +26,16 @@ export const FloatingActions = () => {
     });
   };
 
-  const buttonClass = `
+  const whatsappButtonClass = `
     w-12 h-12 rounded-full flex items-center justify-center
-    bg-[#0B1320] text-ssc-gold border border-ssc-gold/30
-    shadow-premium-medium backdrop-blur-md
+    bg-[#25D366] text-white border-none
+    shadow-[0_0_15px_rgba(37,211,102,0.4)]
     transition-all duration-300 hover:scale-110 active:scale-95
-    hover:border-ssc-gold hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]
+    hover:bg-[#128C7E]
   `;
 
   return (
     <div className="fixed bottom-6 right-6 z-[90] flex flex-col gap-3 max-w-[calc(100vw-48px)]">
-      <div className="hidden">
-        {`'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
-                                        
-                                            
-                                            As Whatsapp Icon like that only use original caller icon for the caller button And for drop up Use another background transparent background is not looking good Use black background only For cALLER use original caller icon`}
-      </div>
 
       {/* Back to Top */}
       <AnimatePresence>
@@ -51,31 +45,15 @@ export const FloatingActions = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.8 }}
             onClick={scrollToTop}
-            className={buttonClass}
+            className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-b from-[#1c222f] to-[#0a101d] text-ssc-gold border-[1px] border-ssc-gold/40 shadow-[0_5px_15px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300 hover:scale-110 hover:border-ssc-gold hover:shadow-[0_8px_25px_rgba(212,175,55,0.25),inset_0_2px_4px_rgba(255,255,255,0.15)] active:scale-95 group relative overflow-hidden"
             aria-label="Back to top"
           >
-            <ArrowUp size={20} strokeWidth={2.5} />
+            {/* Subtle metallic sheen */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+            <ArrowUp size={20} strokeWidth={2.5} className="group-hover:-translate-y-0.5 transition-transform duration-300" />
           </motion.button>
         )}
       </AnimatePresence>
-
-      {/* Phone Call */}
-      <motion.a
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        href={`tel:${phoneNumber}`}
-        className={`${buttonClass} !bg-[#25D366] !border-none text-white hover:bg-[#128C7E] shadow-[0_0_15px_rgba(37,211,102,0.4)]`}
-        aria-label="Call us"
-      >
-        <svg 
-          viewBox="0 0 24 24" 
-          width="22" 
-          height="22" 
-          fill="currentColor"
-        >
-          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-        </svg>
-      </motion.a>
 
       {/* WhatsApp */}
       <motion.a
@@ -84,7 +62,7 @@ export const FloatingActions = () => {
         href={`https://wa.me/91${phoneNumber}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${buttonClass} bg-[#25D366] !border-none text-white hover:bg-[#128C7E] shadow-[0_0_15px_rgba(37,211,102,0.4)]`}
+        className={whatsappButtonClass}
         aria-label="WhatsApp"
       >
         <svg 
