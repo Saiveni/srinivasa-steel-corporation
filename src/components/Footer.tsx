@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import sscLogo from "@/assets/ssc-logo-transparent.png.asset.json";
+const sscLogo = { url: "/logo.png" };
 import { Mail, Phone, MapPin, ShieldCheck, Truck, Users, ChevronDown, ChevronUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";

@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ArrowRight, X, Home, Info, ShoppingBag, Image as ImageIcon, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import sscLogo from "@/assets/ssc-logo-transparent.png.asset.json";
+const sscLogo = { url: "/logo.png" };
 import steelIconsAssetV2 from "@/assets/steel-nav-icons-v2.png.asset.json";
 
 export const Navbar = () => {
