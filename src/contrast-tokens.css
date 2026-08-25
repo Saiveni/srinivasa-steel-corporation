@@ -1,0 +1,34 @@
+:root {
+  --ssc-navy: #0B1320;
+  --ssc-steel-dark: #1C1F26;
+  --ssc-gold: #D4AF37;
+  --ssc-gold-dark: #B58B28;
+  --ssc-steel-light: #E6E8EC;
+  --ssc-gray-muted: #B8BEC7;
+  --ssc-gray-body: #3F4650;
+  --ssc-gray-secondary: #66707C;
+  --ssc-on-dark-primary: #FFFFFF;
+  --ssc-on-dark-body: #E6E8EC;
+  --ssc-on-dark-secondary: #B8BEC7;
+}
+
+/* Base resets */
+.light-background {
+  color: var(--text-primary);
+}
+.light-background h1, .light-background h2, .light-background h3, .light-background h4 {
+  color: var(--text-primary);
+}
+.light-background p {
+  color: var(--text-body);
+}
+
+.dark-background {
+  color: var(--text-on-dark-primary);
+}
+.dark-background h1, .dark-background h2, .dark-background h3, .dark-background h4 {
+  color: var(--text-on-dark-primary);
+}
+.dark-background p {
+  color: var(--text-on-dark-body);
+}
