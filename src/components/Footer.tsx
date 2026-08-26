@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-const sscLogo = { url: "/logo.png" };
+const sscLogo = { url: "/logo.svg" };
 import { Mail, Phone, MapPin, ShieldCheck, Truck, Users, ChevronDown, ChevronUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -82,10 +82,10 @@ export const Footer = () => {
         <div className="grid grid-cols-4 gap-12 relative z-10">
           <div className="space-y-8">
             <Link to="/" className="flex items-center gap-4 group">
-              <div className="relative"><img src={sscLogo.url} alt="SSC Logo" className="h-16 w-16 object-contain" /></div>
-              <div className="flex flex-col border-l border-white/20 pl-4 py-1">
-                <span className="text-xl font-bold tracking-[0.1em] uppercase text-white leading-tight">SRINIVASA <span className="text-ssc-gold">STEEL</span></span>
-                <span className="text-[10px] tracking-[0.2em] text-white/60 uppercase leading-none mt-1">CORPORATION</span>
+              <div className="relative shrink-0"><img src={sscLogo.url} alt="SSC Logo" className="h-28 w-28 sm:h-32 sm:w-32 object-contain brightness-110" /></div>
+              <div className="flex flex-col border-l border-white/20 pl-4 sm:pl-5 py-2">
+                <span className="text-[22px] sm:text-[26px] font-bold tracking-[0.08em] uppercase text-white leading-tight">SRINIVASA <span className="text-ssc-gold">STEEL</span></span>
+                <span className="text-[11px] sm:text-[12px] tracking-[0.2em] text-white/60 uppercase leading-none mt-1.5 font-semibold">CORPORATION</span>
               </div>
             </Link>
             <p className="text-white/70 text-sm leading-relaxed max-w-xs">Trusted steel and TMT supplier serving construction and industrial requirements since 1994.</p>
@@ -129,7 +129,7 @@ export const Footer = () => {
       </div>
       <div className="md:hidden pt-12 pb-8 px-4 space-y-6 bg-[#050B15]">
         <div className="text-center space-y-6 mb-8">
-          <img src={sscLogo.url} alt="SSC Logo" className="h-16 w-16 mx-auto" />
+          <img src={sscLogo.url} alt="SSC Logo" className="h-28 w-28 sm:h-32 sm:w-32 mx-auto" />
           <p className="text-white/70 text-sm px-4">Trusted steel and TMT supplier serving construction and industrial requirements since 1994.</p>
           <div className="flex justify-center gap-4">
             {(['fb', 'li', 'ig', 'yt'] as const).map((t) => (
@@ -242,14 +242,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* MOBILE TMT BAR IMAGE */}
-        <div className="mt-8 px-4 opacity-40">
-           <img 
-            src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" 
-            alt="Steel rods" 
-            className="w-full h-24 object-cover rounded-lg grayscale border border-white/10"
-           />
-        </div>
+
       </div>
       {/* CREDIBILITY & COPYRIGHT */}
       <div className="border-t border-white/5 py-10 bg-[#050B15]">
@@ -287,12 +280,17 @@ export const Footer = () => {
       </div>
       
       <div className="bg-[#03070E] py-8 text-center text-[10px] text-white/30 tracking-widest uppercase px-4 leading-relaxed">
-        <div className="container-wide flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>© 2026 Srinivasa Steel Corporation. All Rights Reserved.</p>
-          <div className="flex gap-6 md:gap-8">
-            <Link to="/contact" search={{ product: "" }} className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/contact" search={{ product: "" }} className="hover:text-white transition-colors">Terms & Conditions</Link>
+        <div className="container-wide flex flex-col items-center gap-4">
+          <div className="flex flex-col md:flex-row w-full justify-between items-center gap-4">
+            <p>© 2026 Srinivasa Steel Corporation. All Rights Reserved.</p>
+            <div className="flex gap-6 md:gap-8">
+              <Link to="/contact" search={{ product: "" }} className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/contact" search={{ product: "" }} className="hover:text-white transition-colors">Terms & Conditions</Link>
+            </div>
           </div>
+          <p className="mt-2 text-[9px] text-white/20">
+            Designed and developed by <a href="https://www.thedreamteamservices.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline decoration-white/20 underline-offset-4">Dreamteam Services</a>
+          </p>
         </div>
       </div>
     </footer>

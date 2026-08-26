@@ -83,6 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { property: "og:site_name", content: "Srinivasa Steel Corporation" },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=1200&auto=format&fit=crop" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -106,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", type: "image/png", href: "/logo.png" },
+      { rel: "icon", type: "image/svg+xml", href: "/logo.svg" },
     ],
   }),
   shellComponent: RootShell,

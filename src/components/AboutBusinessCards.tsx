@@ -1,112 +1,79 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useAnimation, useMotionValue } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import rebarDetail from '@/assets/rebar-detail.jpg.asset.json';
-import rebarWarehouse from '@/assets/rebar-warehouse.jpg.asset.json';
-import vizagAsset from '@/assets/vizag-steel-logo.jpg.asset.json';
-import wireCoils from '@/assets/wire-coils.jpg';
-import decoiling from '@/assets/decoiling.jpg';
 import tmtRebars from '@/assets/tmt-rebars.jpg';
 
 const businessAreas = [
   {
     index: "01",
-    code: "EXP-30Y",
-    title: "30+ YEARS EXPERIENCE",
+    code: "EXP-40Y",
+    title: "40+ YEARS EXPERIENCE",
     description: "A legacy of trust and excellence in the steel industry since 1994, delivering unmatched reliability across South India.",
     image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1200", // Foundation rebar
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    alt: "Premium steel industrial facility representing 30 years of excellence",
+    alt: "Premium steel industrial facility representing 40 years of excellence",
     meta: [
       { label: "ESTABLISHED", value: "1994" },
-      { label: "LEGACY", value: "3 DECADES" }
+      { label: "LEGACY", value: "4 DECADES" }
     ]
   },
-
   {
     index: "02",
-    code: "TMT-550D",
-    title: "STEEL & TMT SUPPLY",
-    description: "Primary distributor of high-strength TMT reinforcement bars (FE-550D) for residential and commercial infrastructure.",
-    image: tmtRebars,
-    alt: "High-quality TMT reinforcement steel rebars supplied by Srinivasa Steel Corporation",
+    code: "LOG-DEL",
+    title: "DELIVERY ON TIME",
+    description: "Reliable and timely delivery to keep your projects moving without unnecessary delays.",
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200", // Heavy truck transport
+    alt: "Heavy truck transporting steel materials for reliable delivery",
     meta: [
-      { label: "GRADE", value: "FE-550D" },
-      { label: "STANDARD", value: "IS 1786" }
+      { label: "LOGISTICS", value: "EFFICIENT" },
+      { label: "TIMELINE", value: "ON-SCHEDULE" }
     ]
   },
   {
     index: "03",
-    code: "WIRE-SEC",
-    title: "WIRE PRODUCTS",
-    description: "Comprehensive range of industrial-grade steel wires and binding coils for precise reinforcement anchoring.",
-    image: wireCoils,
-    alt: "Industrial steel wire coils in a processing facility",
+    code: "WGT-FAC",
+    title: "WEIGHMENT FACILITY",
+    description: "Accurate weighment facility for transparent and reliable steel quantity verification.",
+    image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&q=80&w=1200", // Industrial weighing facility
+    alt: "Industrial weighbridge facility for accurate steel weighment",
     meta: [
-      { label: "TYPE", value: "GI / BINDING" },
-      { label: "FINISH", value: "MACHINED" }
+      { label: "ACCURACY", value: "PRECISION" },
+      { label: "PROCESS", value: "VERIFIED" }
     ]
   },
   {
     index: "04",
-    code: "PRC-DECOIL",
-    title: "DECOILING SOLUTIONS",
-    description: "Precision automated decoiling and straightening services from 2mm to 4.5mm with technical accuracy.",
-    image: decoiling,
-    alt: "Automated steel decoiling machine in operation",
+    code: "CRN-LDG",
+    title: "CRANE LOADING & UNLOADING",
+    description: "Crane loading and unloading capability for safe, efficient and faster material handling.",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356f12?auto=format&fit=crop&q=80&w=1200", // Crane / loading
+    alt: "Industrial crane safely handling and loading heavy steel materials",
     meta: [
-      { label: "TOLERANCE", value: "+/- 0.5MM" },
-      { label: "CAPACITY", value: "HIGH VOL" }
+      { label: "HANDLING", value: "MECHANIZED" },
+      { label: "SAFETY", value: "ENHANCED" }
     ]
   },
   {
     index: "05",
-    code: "CORP-MOU",
-    title: "STRATEGIC PARTNERSHIPS",
-    description: "Our authorized strategic partnerships with India's leading steel manufacturers—Vizag Steel, Jindal Panther, and Simhadri TMT—ensure a robust and reliable supply chain.",
-    image: "", // Not used when logos are present
-    logos: [
-      "/partners/vizag-steel.png",
-      "/partners/jindal-panther.png",
-      "/partners/simhadri-tmt.png"
-    ],
-    alt: "Strategic Partnerships with Vizag Steel, Jindal Panther, and Simhadri TMT",
+    code: "CUT-SVC",
+    title: "ALL SIZE CUTTINGS AVAILABLE",
+    description: "Steel cutting available in all required sizes from 10 ft to 40 ft.",
+    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1200", // Steel cutting / sparks
+    alt: "Precision steel cutting equipment in operation",
     meta: [
-      { label: "PARTNERS", value: "TOP TIER" },
-      { label: "RELATION", value: "DIRECT MOU" }
+      { label: "RANGE", value: "10 FT - 40 FT" },
+      { label: "SERVICE", value: "CUSTOM SIZING" }
     ]
   },
   {
     index: "06",
-    code: "REG-NET",
-    title: "REGIONAL PRESENCE",
-    description: "Robust logistical network spanning Vijayawada, Gannavaram, and Vizag for efficient regional distribution.",
-    image: rebarWarehouse.url,
-    alt: "Industrial distribution center for steel logistics",
+    code: "BLK-QTY",
+    title: "BULK QUANTITY AVAILABLE",
+    description: "Steel materials available in flexible quantities, from smaller requirements of 1–2 tons to larger bulk orders.",
+    image: tmtRebars,
+    alt: "Large organized inventory of bulk TMT steel bars in stockyard",
     meta: [
-      { label: "HUBS", value: "3 MAJOR" },
-      { label: "NETWORK", value: "SOUTH INDIA" }
+      { label: "CAPACITY", value: "HIGH VOL" },
+      { label: "ORDER SIZE", value: "FLEXIBLE" }
     ]
   }
 ];

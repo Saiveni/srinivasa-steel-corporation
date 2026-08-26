@@ -1,156 +1,238 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, X, Phone, Mail, FileText, Shield, Zap, Truck, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, X, Shield, Zap, Truck, CheckCircle2, MapPin, Factory } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 
-// @ts-ignore
-import rebarCoils from "@/assets/rebar-coils.jpg.asset.json";
-// @ts-ignore
-import rebarDetail from "@/assets/rebar-detail.jpg.asset.json";
-// @ts-ignore
-import rebarWarehouse from "@/assets/rebar-warehouse.jpg.asset.json";
 
-const products = [
+import tmtRebars from "@/assets/tmt-rebars.jpg";
+import wireCoils from "@/assets/wire-coils.jpg";
+
+const catalogue = [
   {
     id: "tmt-rebars",
+    location: "GANNAVARAM & VIZAG",
+    locationType: "Supply Yard",
     name: "TMT REBARS",
-    description: "Steel products for construction and structural requirements.",
-    longDescription: "High-strength TMT rebars engineered for superior bonding with concrete and earthquake resistance. Our stock includes a comprehensive range of sizes suitable for residential, commercial, and industrial infrastructure projects.",
+    description: "Premium high-strength TMT reinforcement bars supplied for residential, commercial, and industrial infrastructure.",
+    image: tmtRebars,
+    alt: "High-quality ribbed TMT reinforcement steel bars",
+    specs: ["8mm", "10mm", "12mm", "16mm", "20mm", "25mm", "32mm"]
+  },
+  {
+    id: "6mm-tmt",
+    location: "BHAVANIPURAM — IRON COMPLEX, VIJAYAWADA",
+    locationType: "Manufacturing Unit",
+    name: "6MM TMT",
+    description: "In-house manufactured 6mm TMT bars offering superior strength and ductility for specialized structural requirements.",
     image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=800&auto=format&fit=crop",
-    alt: "Highly realistic close-up photograph of ribbed TMT reinforcement bars",
-    specs: ["5 mm", "5.5 mm", "5.5 mm TMT", "6 mm TMT", "TMT rebars"]
+    alt: "6mm TMT steel bars manufactured by Srinivasa Steel",
+    specs: ["6mm TMT"]
+  },
+  {
+    id: "small-tmt",
+    location: "BHAVANIPURAM",
+    locationType: "Manufacturing Unit",
+    name: "5MM & 5.5MM TMT",
+    description: "Precision-manufactured small diameter TMT for versatile construction applications.",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop",
+    alt: "Small diameter steel rods and 5mm TMT",
+    specs: ["5mm", "5.5mm"]
   },
   {
     id: "binding-wire",
+    location: "BHAVANIPURAM",
+    locationType: "Manufacturing Unit",
     name: "BINDING WIRE",
-    description: "Steel binding wire for reinforcement and construction applications.",
-    longDescription: "Premium grade annealed steel binding wire. Designed for maximum flexibility and strength to ensure secure anchoring of reinforcement bars in all types of concrete structures.",
-    image: (rebarCoils as any)?.url || "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop",
-    alt: "Realistic photograph of tightly coiled binding wire",
-    specs: ["Annealed Quality", "High Flexibility", "Corrosion Resistant"]
+    description: "High-quality industrial binding wire for secure reinforcement anchoring and construction ties.",
+    image: wireCoils,
+    alt: "Industrial steel binding wire coils",
+    specs: ["Binding Wire"]
   },
   {
-    id: "oil-rods",
-    name: "OIL RODS",
-    description: "Steel rods supplied for relevant industrial and construction requirements.",
-    longDescription: "High-performance steel oil rods engineered for specialized mechanical and industrial applications. We provide consistent quality to meet rigorous industrial standards.",
-    image: (rebarDetail as any)?.url || "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop",
-    alt: "Realistic photograph of steel rods",
-    specs: ["Industrial Grade", "Precision Manufactured", "Multi-industry Application"]
-  },
-  {
-    id: "decoiled-steel",
-    name: "DECOILED STEEL",
-    description: "Decoiled steel solutions prepared to meet specific project requirements.",
-    longDescription: "Precision processed decoiled steel. We offer professional straightening and cut-to-length services to provide steel that is ready for immediate application in your specific project.",
-    image: (rebarWarehouse as any)?.url || "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop",
-    alt: "Realistic photograph showing decoiled steel / straightened steel products",
-    specs: ["2mm–4.5mm Material", "10–36 Feet Lengths", "Custom Cut-to-length"]
+    id: "steel-rods",
+    location: "BHAVANIPURAM",
+    locationType: "Manufacturing Unit",
+    name: "STEEL RODS",
+    description: "Standard industrial steel rods and wire rods for diverse mechanical and fabrication needs.",
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop",
+    alt: "Organized steel stock showing small diameter steel rods",
+    specs: ["4mm", "5mm", "6mm"]
   }
 ];
 
-const brands = [
-  { name: "VIZAG STEEL", subtitle: "MoU Dealer" },
-  { name: "SIMHADRI TMT", subtitle: "Dealer" },
-  { name: "JINDAL PANTHER", subtitle: "Dealer" }
+const heroImages = [
+  "/hero/products-bg-1.jpg",
+  "/hero/products-bg-2.jpg",
+  "/hero/products-bg-3.jpg",
 ];
 
 export const ProductsComponent = () => {
-  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<typeof catalogue[0] | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="bg-ssc-steel-light min-h-screen">
-      {/* Product Page Hero */}
-      <section className="relative pt-24 pb-14 lg:pt-36 lg:pb-24 overflow-hidden bg-white border-b border-black/5">
-        <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none"
-             style={{ 
-               backgroundImage: 'linear-gradient(to right, var(--ssc-navy) 1px, transparent 1px), linear-gradient(to bottom, var(--ssc-navy) 1px, transparent 1px)',
-               backgroundSize: '100px 100px'
-             }} 
-        />
-        <div className="container-wide relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-            <div className="w-full lg:w-1/2">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    // The outermost wrapper uses the same deep navy color as the hero overlay. 
+    // This absolutely guarantees that any sub-pixel margin caused by the browser 
+    // or fixed header will show dark navy instead of a jarring white/grey block.
+    <div className="w-full bg-ssc-navy min-h-screen flex flex-col">
+      
+      {/* Premium Product Page Hero - Fully Integrated */}
+      <section className="relative w-full min-h-[100svh] lg:min-h-[100vh] flex items-center justify-center overflow-hidden">
+        {/* Cinematic Background Image Container */}
+        <div className="absolute inset-0 z-0 bg-[#050A13]">
+          <AnimatePresence>
+            <motion.img 
+              key={currentImageIndex}
+              src={heroImages[currentImageIndex]} 
+              alt=""
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full object-cover object-center lg:object-[center_35%]"
+              loading="eager"
+            />
+          </AnimatePresence>
+          {/* Deep Navy Overlay - Ensures text readability while maintaining industrial atmosphere */}
+          <div className="absolute inset-0 bg-[#0B1320]/80 sm:bg-[#0B1320]/70 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1320] via-transparent to-[#0B1320]/60" />
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none mix-blend-overlay" />
+        </div>
+        
+        {/* Content Container - Pushed down visually via pt-[140px] to sit naturally under the floating header */}
+        <div className="container-wide relative z-10 pt-[140px] sm:pt-[160px] lg:pt-[180px] pb-16 px-4 sm:px-6 w-full flex flex-col justify-center min-h-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-[900px] mx-auto text-center w-full"
+          >
+            <span className="inline-flex items-center justify-center gap-3 text-[10px] sm:text-micro text-ssc-gold uppercase mb-6 sm:mb-8 tracking-[0.2em] font-bold">
+              <span className="w-8 sm:w-12 h-[1px] bg-ssc-gold/70" />
+              Srinivasa Steel Corporation
+              <span className="w-8 sm:w-12 h-[1px] bg-ssc-gold/70" />
+            </span>
+            
+            <h1 className="text-[38px] sm:text-[56px] lg:text-[76px] font-bold text-white mb-6 sm:mb-8 uppercase leading-[1.05] tracking-tighter drop-shadow-2xl">
+              STEEL PRODUCTS <br />
+              <span className="text-ssc-gold">ENGINEERED FOR PERFORMANCE.</span>
+            </h1>
+            
+            <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-[700px] mx-auto mb-12 sm:mb-16 leading-relaxed font-medium drop-shadow-md px-2">
+              High-performance steel products for construction, infrastructure and industrial requirements.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full sm:w-auto px-2 sm:px-0">
+              <Button 
+                onClick={() => document.getElementById('product-catalogue')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full sm:w-auto bg-ssc-gold text-ssc-navy hover:bg-white px-8 sm:px-10 py-7 text-[13px] sm:text-[14px] font-bold uppercase tracking-wider rounded-none shadow-[0_10px_30px_-10px_rgba(212,175,55,0.4)] transition-all active:scale-95 border-none"
               >
-                <span className="text-micro text-ssc-gold-dark uppercase mb-4 block">
-                  INDUSTRIAL SOLUTIONS
-                </span>
-                <h1 className="text-h1 text-ssc-navy mb-8 uppercase">
-                  STEEL PRODUCTS BUILT <br />
-                  <span className="text-ssc-gold-dark">FOR PERFORMANCE.</span>
-                </h1>
-                <p className="text-body text-ssc-gray-body max-w-[540px] mb-10">
-                  High-performance steel products engineered for demanding applications. Consistent quality and reliable supply across the region.
-                </p>
+                VIEW PRODUCTS
+              </Button>
+              <Link to="/contact" search={{ product: "" }} className="w-full sm:w-auto">
                 <Button 
-                  onClick={() => document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-ssc-gold text-ssc-navy hover:bg-ssc-gold/90"
+                  variant="outline"
+                  className="w-full border-white/30 bg-black/20 backdrop-blur-md hover:bg-white/10 text-white px-8 sm:px-10 py-7 text-[13px] sm:text-[14px] font-bold uppercase tracking-wider rounded-none transition-all active:scale-95"
                 >
-                  VIEW CATALOGUE <ArrowRight className="ml-2 w-4 h-4" />
+                  REQUEST A QUOTE
                 </Button>
-              </motion.div>
+              </Link>
             </div>
-            <div className="w-full lg:w-1/2">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="relative aspect-[4/3] lg:aspect-[5/4] rounded-[24px] overflow-hidden border border-black/5 shadow-2xl shadow-ssc-navy/5"
-              >
-                <img 
-                  src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=800&auto=format&fit=crop" 
-                  alt="Premium steel reinforcement rebar bundles"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-ssc-navy/10 mix-blend-multiply" />
-              </motion.div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Product Category Grid */}
-      <section id="product-grid" className="section-spacing">
-        <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            {products.map((product, index) => (
+      {/* Cinematic Product Catalogue Section */}
+      {/* Background is F8FAFC to create a sharp contrast transition from the dark hero */}
+      <section id="product-catalogue" className="py-20 lg:py-32 bg-[#F8FAFC]">
+        <div className="container-wide px-4 sm:px-6">
+          <div className="text-center mb-16 lg:mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-[10px] sm:text-micro text-ssc-gold-dark uppercase mb-4 block tracking-widest font-bold">
+                INDUSTRIAL SOLUTIONS
+              </span>
+              <h2 className="text-[32px] sm:text-[40px] lg:text-[48px] text-ssc-navy mb-4 uppercase tracking-tighter font-bold">
+                OUR STEEL PRODUCTS
+              </h2>
+              <p className="text-sm sm:text-base text-ssc-gray-body max-w-[600px] mx-auto leading-relaxed">
+                Quality steel products supplied for construction, infrastructure and industrial requirements.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {catalogue.map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group cursor-pointer"
+                className="group flex flex-col bg-white border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer overflow-hidden"
                 onClick={() => setSelectedProduct(product)}
               >
-                <div className="bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden transition-all duration-500 group-hover:shadow-[0_16px_48px_rgba(0,0,0,0.06)] group-hover:-translate-y-1">
-                  <div className="aspect-[16/9] overflow-hidden bg-[#F8FAFC]">
-                    <motion.img 
-                      src={product.image} 
-                      alt={product.alt}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.04 }}
-                      transition={{ duration: 0.8 }}
-                      loading="lazy"
-                    />
+                {/* Flat Image Banner */}
+                <div className="relative h-[240px] sm:h-[320px] w-full overflow-hidden">
+                  <motion.img 
+                    src={product.image} 
+                    alt={product.alt}
+                    className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.2,1,0.3,1)]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-ssc-navy/10 group-hover:bg-transparent transition-colors duration-500" />
+                </div>
+                
+                {/* Flat Clean Content Area */}
+                <div className="p-8 sm:p-10 flex flex-col flex-1 bg-white relative">
+                  
+                  {/* Location Badge */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-[10px] sm:text-xs font-bold text-ssc-gold-dark uppercase tracking-widest">
+                      {product.location}
+                    </span>
+                    <span className="text-black/20 mx-2">•</span>
+                    <span className="text-[9px] sm:text-[10px] text-ssc-gray-body font-bold uppercase tracking-widest">
+                      {product.locationType}
+                    </span>
                   </div>
-                  <div className="p-8 lg:p-10">
-                    <h3 className="text-h3 text-ssc-navy mb-4 uppercase">
-                      {product.name}
-                    </h3>
-                    <p className="text-body text-ssc-gray-body mb-8">
-                      {product.description}
-                    </p>
-                    <Link to="/contact" search={{ product: product.name }} className="text-micro text-ssc-gold-dark hover:text-ssc-navy transition-colors uppercase">
-                      REQUEST A QUOTE <ArrowRight className="inline-block ml-2 w-4 h-4 transition-transform group-hover:translate-x-2" />
-                    </Link>
+
+                  <h3 className="text-2xl sm:text-3xl font-bold text-ssc-navy uppercase tracking-tighter mb-4 leading-none group-hover:text-ssc-gold-dark transition-colors">
+                    {product.name}
+                  </h3>
+                  
+                  <p className="text-sm sm:text-[15px] text-ssc-gray-body leading-relaxed mb-8 font-medium">
+                    {product.description}
+                  </p>
+                  
+                  {/* Size Chips */}
+                  <div className="mt-auto pt-6 border-t border-black/5">
+                    <div className="flex flex-wrap gap-2">
+                      {product.specs.map((spec) => (
+                        <div key={spec} className="px-3 py-1.5 bg-ssc-steel-light text-ssc-navy text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                          {spec}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Clean CTA Button */}
+                  <div className="mt-8">
+                    <div className="inline-flex items-center gap-2 text-ssc-navy font-bold text-[11px] sm:text-xs uppercase tracking-[0.15em] border-b-2 border-transparent group-hover:border-ssc-gold transition-all pb-1">
+                      VIEW FULL DETAILS <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -159,199 +241,200 @@ export const ProductsComponent = () => {
         </div>
       </section>
 
-      {/* Decoiling Feature Section */}
-      <section className="relative section-spacing bg-ssc-navy overflow-hidden">
+      {/* NEW Closing Section - Footer Adjacent */}
+      <section className="py-20 lg:py-28 relative overflow-hidden bg-ssc-steel-light border-y border-black/5">
+        
+        {/* Structural Background Configuration */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={(rebarCoils as any)?.url || "/placeholder.svg"} 
-            alt="Steel decoiling machine processing stock"
-            className="w-full h-full object-cover opacity-10 grayscale"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-ssc-navy via-ssc-navy/90 to-transparent" />
+           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-40 pointer-events-none" />
         </div>
-        <div className="container-wide relative z-10">
-          <div className="max-w-[700px]">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+        
+        <div className="container-wide relative z-10 px-4 sm:px-6">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
+             
+             {/* Left: Typography & Capabilities Story */}
+             <div>
+               <div className="inline-flex items-center gap-3 mb-6">
+                 <Shield className="w-5 h-5 text-ssc-gold-dark" />
+                 <span className="text-[10px] sm:text-micro text-ssc-navy uppercase tracking-[0.2em] font-bold">
+                   INDUSTRIAL CAPABILITY
+                 </span>
+               </div>
+               
+               <h2 className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[56px] text-ssc-navy uppercase tracking-tighter font-bold mb-6 leading-[1.05]">
+                 QUALITY. <br />
+                 AVAILABILITY. <br />
+                 <span className="text-ssc-gold-dark">SUPPLY.</span>
+               </h2>
+               
+               <p className="text-[15px] sm:text-base lg:text-lg text-ssc-gray-body leading-relaxed font-medium mb-10 max-w-[480px]">
+                 Reliable steel supply for construction, infrastructure and industrial requirements — with dependable availability, practical quantity options and timely delivery.
+               </p>
+
+               {/* Capability Grid */}
+               <div className="space-y-6 sm:space-y-8">
+                 {[
+                   { title: "RELIABLE AVAILABILITY", desc: "Consistent access to essential steel products.", icon: Shield },
+                   { title: "FLEXIBLE QUANTITIES", desc: "Supply available for both smaller requirements and bulk orders.", icon: Zap },
+                   { title: "TIMELY DELIVERY", desc: "Planned dispatch and dependable supply support.", icon: Truck },
+                   { title: "INDUSTRIAL CAPABILITY", desc: "Products and handling capability for demanding requirements.", icon: Factory }
+                 ].map((item, idx) => (
+                   <motion.div 
+                     key={item.title} 
+                     initial={{ opacity: 0, x: -20 }}
+                     whileInView={{ opacity: 1, x: 0 }}
+                     viewport={{ once: true }}
+                     transition={{ duration: 0.5, delay: idx * 0.1 }}
+                     className="flex gap-4 sm:gap-5 group"
+                   >
+                     <div className="w-12 h-12 shrink-0 bg-white border border-black/5 flex items-center justify-center group-hover:border-ssc-gold/40 transition-colors shadow-sm">
+                       <item.icon className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-ssc-gold-dark" />
+                     </div>
+                     <div>
+                       <h4 className="text-[13px] sm:text-[14px] lg:text-[15px] font-bold text-ssc-navy uppercase tracking-widest mb-1 sm:mb-1.5 group-hover:text-ssc-gold-dark transition-colors">
+                         {item.title}
+                       </h4>
+                       <p className="text-[13px] sm:text-sm text-ssc-gray-body max-w-[320px] leading-relaxed">
+                         {item.desc}
+                       </p>
+                     </div>
+                   </motion.div>
+                 ))}
+               </div>
+             </div>
+
+             {/* Right: Feature Image Panel with Embedded CTA */}
+             <motion.div 
+               initial={{ opacity: 0, y: 30 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               transition={{ duration: 0.7 }}
+               className="hidden md:flex flex-col justify-end w-full h-[500px] lg:h-[600px] border border-black/5 relative overflow-hidden group shadow-xl"
+             >
+               <div className="absolute inset-0 z-0">
+                 <img 
+                   src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=1200&auto=format&fit=crop" 
+                   alt="Premium Engineered Steel"
+                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[2s] ease-[cubic-bezier(0.2,1,0.3,1)]"
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-t from-ssc-navy via-ssc-navy/50 to-transparent opacity-90" />
+               </div>
+               
+               <div className="relative z-10 p-8 lg:p-10 w-full">
+                 <Link to="/contact" search={{ product: "" }}>
+                   <Button className="bg-ssc-gold text-ssc-navy hover:bg-white w-full h-14 lg:h-16 font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[13px] sm:text-sm rounded-none border-none shadow-xl transition-all">
+                     REQUEST SUPPLY QUOTE <ArrowRight className="ml-3 w-4 h-4 sm:w-5 sm:h-5" />
+                   </Button>
+                 </Link>
+               </div>
+             </motion.div>
+             
+             {/* Mobile CTA (Shows only on small screens) */}
+             <motion.div 
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               className="block md:hidden mt-4 pt-4 border-t border-white/10"
+             >
+               <Link to="/contact" search={{ product: "" }}>
+                 <Button className="bg-ssc-gold text-ssc-navy hover:bg-white w-full h-14 font-bold uppercase tracking-[0.15em] text-[13px] rounded-none border-none shadow-xl transition-all">
+                   REQUEST SUPPLY QUOTE <ArrowRight className="ml-2 w-4 h-4" />
+                 </Button>
+               </Link>
+             </motion.div>
+
+           </div>
+        </div>
+      </section>
+
+      {/* Premium Product Detail Modal using Framer Motion for Perfect Animation */}
+      <AnimatePresence>
+        {selectedProduct && (
+          <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 pointer-events-auto">
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
+              exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="absolute inset-0 bg-black/60"
+              onClick={() => setSelectedProduct(null)}
+            />
+            
+            {/* Modal Content */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-[900px] bg-white shadow-2xl flex flex-col md:flex-row overflow-hidden max-h-[90vh] md:max-h-[80vh] rounded-xl z-10"
             >
-              <span className="text-micro text-ssc-gold uppercase mb-4 block">
-                CORE CAPABILITIES
-              </span>
-              <h2 className="text-h2 text-ssc-on-dark-primary mb-8 uppercase">
-                DECOILING FOR <br />
-                <span className="text-ssc-gold">PRECISION.</span>
-              </h2>
-              <p className="text-body text-ssc-on-dark-body mb-10">
-                Precision automated decoiling and straightening services from 2mm to 4.5mm with technical accuracy.
-              </p>
-              <Link to="/contact" search={{ product: "DECOILED STEEL" }}>
-                <Button className="w-full sm:w-auto bg-ssc-gold text-ssc-navy hover:bg-ssc-gold/90">
-                  ENQUIRE ABOUT DECOILING <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
+              {/* Close Button */}
+              <button 
+                onClick={() => setSelectedProduct(null)}
+                className="absolute right-4 top-4 z-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm backdrop-blur-md border 
+                           bg-white/20 text-white hover:bg-white/90 hover:text-ssc-navy border-white/30
+                           md:bg-black/5 md:text-ssc-navy md:hover:bg-ssc-navy md:hover:text-white md:border-black/10"
+              >
+                <X size={18} strokeWidth={2.5} />
+              </button>
+
+              {/* Image Section (Top on mobile, Left on desktop) */}
+              <div className="w-full md:w-1/2 relative bg-ssc-navy shrink-0 aspect-[4/3] md:aspect-auto">
+                <img 
+                  src={selectedProduct.image} 
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#050A13]/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 z-10">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] font-bold tracking-widest uppercase mb-4 rounded-full">
+                    <MapPin size={12} className="text-ssc-gold" /> {selectedProduct.location}
+                  </span>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl text-white font-bold uppercase leading-tight tracking-tighter drop-shadow-md">
+                    {selectedProduct.name}
+                  </h2>
+                </div>
+              </div>
+
+              {/* Content Section (Bottom on mobile, Right on desktop) */}
+              <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col bg-[#F8FAFC] overflow-y-auto">
+                
+                <div className="flex-1">
+                  <h4 className="text-[11px] text-ssc-gray-body font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                    <span className="w-4 h-[1px] bg-ssc-gold-dark" /> Description
+                  </h4>
+                  <p className="text-[15px] sm:text-base text-ssc-navy mb-8 leading-relaxed font-medium">
+                    {selectedProduct.description}
+                  </p>
+                  
+                  <h4 className="text-[11px] text-ssc-navy font-bold uppercase tracking-widest mb-4 border-b border-black/5 pb-3">
+                    Available Specifications
+                  </h4>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {selectedProduct.specs.map((spec) => (
+                      <div key={spec} className="px-4 py-2 bg-white border border-black/5 text-ssc-navy text-[11px] font-bold uppercase tracking-wider flex items-center gap-2 rounded-md shadow-sm">
+                        <CheckCircle2 size={14} className="text-ssc-gold-dark shrink-0" />
+                        {spec}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA Area */}
+                <div className="mt-auto pt-6 border-t border-black/10">
+                  <Link to="/contact" search={{ product: selectedProduct.name }} onClick={() => setSelectedProduct(null)}>
+                    <Button className="w-full h-14 bg-ssc-navy hover:bg-ssc-gold text-white hover:text-ssc-navy font-bold uppercase text-[13px] tracking-[0.15em] rounded-lg shadow-[0_8px_20px_rgba(11,19,32,0.2)] transition-all duration-300 flex items-center justify-center gap-3 group border-none">
+                      REQUEST A QUOTE <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </div>
+
+              </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Brands / Supply Partners */}
-      <section className="py-14 bg-white border-y border-ssc-navy/5">
-        <div className="container-wide">
-          <div className="text-center mb-16">
-            <span className="text-micro text-ssc-gold-dark uppercase mb-4 block">
-              SUPPLY NETWORK
-            </span>
-            <h2 className="text-h3 text-ssc-navy mb-16 uppercase">
-              TRUSTED DEALER RELATIONSHIPS
-            </h2>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-32">
-            {brands.map((brand, idx) => (
-              <motion.div
-                key={brand.name}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15 }}
-                className="text-center"
-              >
-                <div className="text-2xl lg:text-3xl font-body font-bold text-ssc-navy tracking-tighter uppercase mb-2">
-                  {brand.name}
-                </div>
-                <div className="text-micro text-ssc-gold-dark uppercase">
-                  {brand.subtitle}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Product Quality Section */}
-      <section className="section-spacing bg-ssc-steel-light">
-        <div className="container-wide">
-          <div className="text-center mb-20">
-            <h2 className="text-h2 text-ssc-navy uppercase">
-              QUALITY. AVAILABILITY. <span className="text-ssc-gold-dark">SUPPLY.</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
-            {[
-              { icon: Shield, title: "QUALITY", desc: "Products aligned with construction and industrial requirements." },
-              { icon: Zap, title: "AVAILABILITY", desc: "Focused on dependable product supply." },
-              { icon: Truck, title: "SERVICE", desc: "Clear coordination from enquiry to delivery." }
-            ].map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 bg-white rounded-[12px] flex items-center justify-center mx-auto mb-8 shadow-sm border border-ssc-navy/5">
-                  <item.icon className="w-8 h-8 text-ssc-gold-dark" />
-                </div>
-                <h3 className="text-h4 text-ssc-navy mb-4 uppercase">{item.title}</h3>
-                <p className="text-body text-ssc-gray-body">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="section-spacing bg-ssc-navy relative overflow-hidden text-ssc-on-dark-primary text-center">
-        <div className="absolute inset-0 z-0 opacity-10"
-             style={{ 
-               backgroundImage: 'radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%)',
-             }} 
-        />
-        <div className="container-wide relative z-10 flex flex-col items-center">
-          <h2 className="text-h2 text-ssc-on-dark-primary mb-8 uppercase">
-            REQUEST A <span className="text-ssc-gold">QUOTE.</span>
-          </h2>
-          <p className="text-ssc-on-dark-body text-body mb-12 max-w-[600px] mx-auto">
-            Tell us your requirement and our team can help you with the appropriate steel product or decoiling solution.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" search={{ product: "" }} className="w-full sm:w-auto">
-              <Button 
-                className="w-full bg-ssc-gold text-ssc-navy hover:bg-ssc-gold/90"
-              >
-                GET A QUOTE <ArrowRight className="ml-3" size={20} />
-              </Button>
-            </Link>
-            <Link to="/contact" search={{ product: "" }} className="w-full sm:w-auto">
-              <Button 
-                variant="outline"
-                className="w-full border-ssc-on-dark-primary/20 hover:bg-white/5 text-ssc-on-dark-primary"
-              >
-                CONTACT US
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Detail Modal */}
-      <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
-        <DialogContent className="max-w-[95vw] sm:max-w-[700px] p-0 overflow-hidden bg-white rounded-[16px] border-none shadow-2xl">
-          <DialogClose className="absolute right-6 top-6 z-50 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-            <X size={20} />
-          </DialogClose>
-          
-          <div className="flex flex-col">
-            <div className="aspect-[16/9] w-full overflow-hidden relative bg-[#F8FAFC]">
-              <img 
-                src={selectedProduct?.image} 
-                alt={selectedProduct?.alt}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ssc-navy to-transparent opacity-60" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <span className="text-ssc-gold text-[10px] font-body font-bold tracking-[0.3em] uppercase mb-2 block">
-                  PRODUCT SPECIFICATIONS
-                </span>
-                <DialogTitle className="text-h3 text-ssc-on-dark-primary uppercase m-0">
-                  {selectedProduct?.name}
-                </DialogTitle>
-              </div>
-            </div>
-            
-            <div className="p-8 lg:p-10">
-              <p className="text-body text-foreground/70 mb-8">
-                {selectedProduct?.longDescription}
-              </p>
-              
-              <div className="mb-10">
-                <h4 className="text-micro text-ssc-navy uppercase mb-6 flex items-center gap-3">
-                  <span className="w-8 h-[1px] bg-ssc-gold-dark" />
-                  Technical Details
-                </h4>
-                <div className="flex flex-wrap gap-3">
-                  {selectedProduct?.specs.map((spec) => (
-                    <div key={spec} className="px-5 py-2.5 bg-ssc-steel-light border border-black/[0.03] rounded-full text-foreground text-small font-bold uppercase tracking-wider flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-ssc-gold-dark" />
-                      {spec}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <Link to="/contact" search={{ product: selectedProduct?.name || "" }} onClick={() => setSelectedProduct(null)}>
-                <Button className="w-full h-16 bg-ssc-navy hover:bg-ssc-navy/90 text-ssc-on-dark-primary font-body font-bold uppercase text-lg tracking-[0.2em] rounded-xl shadow-xl shadow-ssc-navy/10 transition-all flex items-center justify-center gap-3">
-                  REQUEST QUOTE <ArrowRight size={20} className="text-ssc-gold" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -7,17 +7,43 @@ import { IndustrialNetwork } from "@/components/IndustrialNetwork";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { BrandStrip } from "@/components/BrandStrip";
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.srinivasasteelcorporation.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": "https://www.srinivasasteelcorporation.com/about"
+    }
+  ]
+};
+
 export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "About Srinivasa Steel Corporation | Established 1994" },
-      { name: "description", content: "Learn about Srinivasa Steel Corporation, established in 1994 and serving steel, TMT and related construction requirements." },
-      { property: "og:title", content: "About Srinivasa Steel Corporation | Established 1994" },
-      { property: "og:description", content: "Learn about Srinivasa Steel Corporation, established in 1994 and serving steel, TMT and related construction requirements." },
-      { property: "og:type", content: "website" },
+      { title: "About Srinivasa Steel Corporation | 40+ Years of Steel Supply" },
+      { name: "description", content: "Learn about Srinivasa Steel Corporation's 40+ year legacy, our advanced stockyard facilities, weighment accuracy, and our commitment to on-time steel delivery." },
+      { property: "og:title", content: "About Srinivasa Steel Corporation | 40+ Years of Steel Supply" },
+      { property: "og:description", content: "Learn about Srinivasa Steel Corporation's 40+ year legacy, our advanced stockyard facilities, weighment accuracy, and our commitment to on-time steel delivery." },
+      { property: "og:url", content: "https://www.srinivasasteelcorporation.com/about" },
+      { property: "og:image", content: "https://www.srinivasasteelcorporation.com/hero/hero-5.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.srinivasasteelcorporation.com/about" }
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(breadcrumbSchema) }
+    ]
   }),
 });
 

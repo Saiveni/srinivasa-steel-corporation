@@ -5,11 +5,11 @@ import { Link } from '@tanstack/react-router';
 
 const strengths = [
   {
-    title: "30+ YEARS EXPERIENCE",
+    title: "40+ YEARS EXPERIENCE",
     description: "Built on a foundation of trust and industrial expertise since 1994.",
     label: "FOUNDATION-94",
     image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1200", // Foundation / Industrial yard
-    alt: "Premium steel stockyard representing 30 years of excellence"
+    alt: "Premium steel stockyard representing 40 years of excellence"
   },
   {
     title: "STEEL & TMT SUPPLY",
@@ -205,7 +205,7 @@ export const WhyChooseUs = () => {
                 YOUR PROJECTS?
               </h3>
               <p className="text-white/40 text-micro">
-                30+ Years of Proven Industrial Quality
+                40+ Years of Proven Industrial Quality
               </p>
             </div>
             

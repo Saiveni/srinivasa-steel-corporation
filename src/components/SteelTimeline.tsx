@@ -28,7 +28,7 @@ const milestones = [
     num: "04",
     year: "TODAY",
     title: "REGIONAL PRESENCE",
-    description: "3 locations. 30+ years of trust. Thousands of tons delivered.",
+    description: "3 locations. 40+ years of trust. Thousands of tons delivered.",
     icon: MapPin
   }
 ];

@@ -17,7 +17,7 @@ interface HeroImage {
 const HERO_IMAGES: HeroImage[] = [
   {
     url: "/hero/hero-1.jpg",
-    alt: "High-quality industrial steel wire coils in distribution center",
+    alt: "Industrial steel wire coils in Srinivasa Steel Corporation distribution center",
     position: {
       desktop: "center center",
       mobile: "45% center"
@@ -25,7 +25,7 @@ const HERO_IMAGES: HeroImage[] = [
   },
   {
     url: "/hero/hero-2.jpg",
-    alt: "Premium bundles of ribbed TMT reinforcement steel bars",
+    alt: "Premium bundles of ribbed TMT reinforcement steel bars supplied by Srinivasa Steel Corporation",
     position: {
       desktop: "center center",
       mobile: "center center"
@@ -33,7 +33,7 @@ const HERO_IMAGES: HeroImage[] = [
   },
   {
     url: "/hero/hero-3.jpg",
-    alt: "Industrial steel manufacturing facility with wire coils",
+    alt: "Industrial steel facility with wire coils ready for dispatch",
     position: {
       desktop: "center center",
       mobile: "40% center"
@@ -41,7 +41,7 @@ const HERO_IMAGES: HeroImage[] = [
   },
   {
     url: "/hero/hero-4.jpg",
-    alt: "Heavy duty TMT steel rebar stock ready for distribution",
+    alt: "Heavy duty TMT steel rebar stock at Srinivasa Steel Corporation yard",
     position: {
       desktop: "center center",
       mobile: "65% center"
@@ -49,7 +49,7 @@ const HERO_IMAGES: HeroImage[] = [
   },
   {
     url: "/hero/hero-5.jpg",
-    alt: "Extensive inventory of premium quality steel rebar coils",
+    alt: "Extensive inventory of premium quality steel rebar coils in Vijayawada",
     position: {
       desktop: "center center",
       mobile: "50% center"

@@ -47,7 +47,7 @@ const CredibilityCard = ({ title, description, icon: Icon, index }: CredibilityC
 export const TrustStatsBar = () => {
   const items = [
     {
-      title: "30+ YEARS EXPERIENCE",
+      title: "40+ YEARS EXPERIENCE",
       description: "Established in 1994, building a legacy of excellence in the steel industry across generations.",
       icon: Award
     },

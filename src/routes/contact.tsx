@@ -17,6 +17,25 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "@tanstack/react-router";
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.srinivasasteelcorporation.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contact",
+      "item": "https://www.srinivasasteelcorporation.com/contact"
+    }
+  ]
+};
+
 const contactSchema = z.object({
   fullName: z.string().min(2, "Full Name is required"),
   companyName: z.string().optional(),
@@ -40,13 +59,20 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
   head: () => ({
     meta: [
-      { title: "Contact Srinivasa Steel Corporation | Get a Quote" },
-      { name: "description", content: "Contact Srinivasa Steel Corporation for TMT, steel product and decoiling requirements." },
-      { property: "og:title", content: "Contact Srinivasa Steel Corporation | Get a Quote" },
-      { property: "og:description", content: "Contact Srinivasa Steel Corporation for TMT, steel product and decoiling requirements." },
-      { property: "og:type", content: "website" },
+      { title: "Contact Srinivasa Steel Corporation | Vijayawada & Gannavaram" },
+      { name: "description", content: "Contact Srinivasa Steel Corporation for bulk steel, TMT rebars, and industrial decoiling requirements in Vijayawada and Gannavaram." },
+      { property: "og:title", content: "Contact Srinivasa Steel Corporation | Vijayawada & Gannavaram" },
+      { property: "og:description", content: "Contact Srinivasa Steel Corporation for bulk steel, TMT rebars, and industrial decoiling requirements in Vijayawada and Gannavaram." },
+      { property: "og:url", content: "https://www.srinivasasteelcorporation.com/contact" },
+      { property: "og:image", content: "https://www.srinivasasteelcorporation.com/hero/hero-5.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.srinivasasteelcorporation.com/contact" }
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(breadcrumbSchema) }
+    ]
   }),
 });
 

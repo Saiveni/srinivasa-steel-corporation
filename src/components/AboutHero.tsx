@@ -125,12 +125,12 @@ export const AboutHero = () => {
 
               <motion.div variants={itemVariants} className="max-w-[560px]">
                 <p className="text-ssc-on-dark-body text-body-large mb-10 lg:mb-16">
-                  An established steel supplier serving construction and industrial requirements with over three decades of engineering excellence — from TMT reinforcement to precision decoiling.
+                  An established steel supplier serving construction and industrial requirements with over four decades of engineering excellence — from TMT reinforcement to precision decoiling.
                 </p>
 
                 <div className="flex items-center gap-6 lg:gap-12 pb-8">
                   <div className="flex flex-col">
-                    <span className="text-[28px] lg:text-[36px] font-bold text-ssc-on-dark-primary leading-none">30+</span>
+                    <span className="text-[28px] lg:text-[36px] font-bold text-ssc-on-dark-primary leading-none">40+</span>
                     <span className="text-ssc-on-dark-secondary text-[11px] lg:text-[12px] uppercase tracking-wider mt-2 font-medium">Years Experience</span>
                   </div>
                   <div className="w-[1px] h-12 bg-ssc-on-dark-primary/10" />
