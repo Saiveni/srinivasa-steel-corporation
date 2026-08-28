@@ -88,13 +88,13 @@ const SpecCard = ({ area, index }: { area: typeof businessAreas[0] & { logos?: s
       className="group relative h-full"
     >
       {/* Specification Panel Surface */}
-      <div className="relative h-full bg-ssc-steel-dark rounded-[14px] border border-ssc-on-dark-primary/10 overflow-hidden flex flex-col shadow-premium-soft transition-all duration-300 lg:group-hover:-translate-y-2 lg:group-hover:border-ssc-gold/30 lg:group-hover:shadow-premium-medium transform-gpu">
+      <div className="relative h-full bg-ssc-steel-dark rounded-[14px] border border-ssc-on-dark-primary/10 overflow-hidden flex flex-col shadow-premium-soft transition-all duration-300 lg:group-hover:-translate-y-2 lg:group-hover:border-ssc-gold/30 lg:group-hover:shadow-premium-medium">
 
         {/* Brushed Metal Texture */}
         <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] pointer-events-none z-10" />
 
         {/* Image / Logos Area */}
-        <div className="relative h-[160px] sm:h-[180px] lg:h-[240px] overflow-hidden shrink-0 bg-white">
+        <div className="relative h-[160px] sm:h-[180px] lg:h-[240px] overflow-hidden shrink-0 bg-ssc-steel-dark">
           {area.logos ? (
             <div className="w-full h-full flex items-center justify-center gap-4 px-4 bg-white">
               {area.logos.map((logo, idx) => (
@@ -116,7 +116,7 @@ const SpecCard = ({ area, index }: { area: typeof businessAreas[0] & { logos?: s
           )}
 
           {/* Index Chip */}
-          <div className="absolute top-3 left-3 flex items-center gap-2 bg-ssc-navy/70 backdrop-blur-md border border-ssc-on-dark-primary/10 rounded-full px-2 py-1 lg:group-hover:border-ssc-gold/40 transition-colors duration-500 z-20">
+          <div className="absolute top-3 left-3 flex items-center gap-2 bg-ssc-navy/90 border border-ssc-on-dark-primary/10 rounded-full px-2 py-1 lg:group-hover:border-ssc-gold/40 transition-colors duration-500 z-20">
             <span className="text-ssc-gold text-[10px] lg:text-micro">
               {area.index}
             </span>

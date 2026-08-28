@@ -54,7 +54,7 @@ const StrengthCard = ({ item, isMobile = false }: { item: typeof strengths[0], i
       <img 
         src={item.image} 
         alt={item.alt}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className="w-full h-full object-cover transition-transform duration-700 lg:group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ssc-navy/20 to-transparent opacity-60" />
     </div>
