@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 
 export function SmoothScrollController() {
   useEffect(() => {
@@ -9,11 +10,13 @@ export function SmoothScrollController() {
 
     const lenis = new Lenis({
       autoRaf: true,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard smooth easing
       lerp: 0.1,
       smoothWheel: true,
-      syncTouch: false,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1,
+      syncTouch: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 2,
     });
 
     return () => {

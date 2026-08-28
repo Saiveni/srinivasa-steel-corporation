@@ -97,7 +97,7 @@ export const BrandPreloader = ({ onComplete, showIntro = true }: PreloaderProps)
                 duration: 1.2, 
                 ease: [0.16, 1, 0.3, 1] 
               }}
-              className="w-[130px] h-[130px] sm:w-[190px] sm:h-[190px] flex items-center justify-center mb-8"
+              className="w-[150px] h-[150px] sm:w-[225px] sm:h-[225px] flex items-center justify-center mb-6 sm:mb-8"
             >
               <img
                 src={sscLogo.url}

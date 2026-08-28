@@ -83,7 +83,6 @@ function HomePage() {
 
 
       <TrustCapabilities />
-      <TrustStatsBar />
       <ProductShowcase />
       
       <SteelTimeline />

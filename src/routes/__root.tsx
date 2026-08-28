@@ -83,11 +83,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      // Standard SEO
+      { title: "Srinivasa Steel Corporation" },
+      { name: "description", content: "Trusted steel and TMT supplier serving construction and industrial requirements since 1994." },
+      
+      // Open Graph / WhatsApp / Facebook
       { property: "og:site_name", content: "Srinivasa Steel Corporation" },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=1200&auto=format&fit=crop" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=1200&auto=format&fit=crop" },
+      { property: "og:title", content: "Srinivasa Steel Corporation" },
+      { property: "og:description", content: "Trusted steel and TMT supplier serving construction and industrial requirements since 1994." },
+      // WhatsApp prefers an absolute URL for og:image, but relative is standard for development
+      { property: "og:image", content: "/favicon.png" }, 
+      { property: "og:image:width", content: "512" },
+      { property: "og:image:height", content: "512" },
+      
+      // Twitter
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Srinivasa Steel Corporation" },
+      { name: "twitter:description", content: "Trusted steel and TMT supplier serving construction and industrial requirements since 1994." },
+      { name: "twitter:image", content: "/favicon.png" },
     ],
     links: [
       {
@@ -107,7 +121,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", type: "image/svg+xml", href: "/logo.svg" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
   shellComponent: RootShell,

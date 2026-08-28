@@ -305,7 +305,7 @@ export const SteelGallery = ({ isHomePage = false }: { isHomePage?: boolean }) =
         PREMIUM CINEMATIC HERO
         ========================================================
       */}
-      <section className="relative w-full pt-[90px] sm:pt-[100px] pb-16 sm:pb-24 overflow-hidden">
+      <section className="relative w-full pt-[90px] sm:pt-[100px] pb-32 sm:pb-48 lg:pb-56 overflow-hidden">
         {/* Background Image Container */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -336,7 +336,7 @@ export const SteelGallery = ({ isHomePage = false }: { isHomePage?: boolean }) =
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-white mb-4 uppercase leading-[1.05] tracking-tighter drop-shadow-lg"
+              className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-white mb-8 uppercase leading-[1.2] tracking-tighter drop-shadow-lg"
             >
               Crafted with <span className="text-ssc-gold">Strength.</span><br />
               Captured with <span className="text-ssc-gold">Precision.</span>
@@ -346,7 +346,7 @@ export const SteelGallery = ({ isHomePage = false }: { isHomePage?: boolean }) =
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-white/80 max-w-xl leading-relaxed font-medium"
+              className="text-base sm:text-lg text-white/80 max-w-xl leading-relaxed font-medium mb-4"
             >
               From raw steel to finished stockyards, explore our products, facilities, inventory and operations. We deliver quality in every stage.
             </motion.p>

@@ -84,63 +84,114 @@ export const ProductsComponent = () => {
     // or fixed header will show dark navy instead of a jarring white/grey block.
     <div className="w-full bg-ssc-navy min-h-screen flex flex-col">
       
-      {/* Premium Product Page Hero - Fully Integrated */}
-      <section className="relative w-full min-h-[100svh] lg:min-h-[100vh] flex items-center justify-center overflow-hidden">
-        {/* Cinematic Background Image Container */}
-        <div className="absolute inset-0 z-0 bg-[#050A13]">
-          <AnimatePresence>
-            <motion.img 
-              key={currentImageIndex}
-              src={heroImages[currentImageIndex]} 
-              alt=""
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover object-center lg:object-[center_35%]"
-              loading="eager"
-            />
-          </AnimatePresence>
-          {/* Deep Navy Overlay - Ensures text readability while maintaining industrial atmosphere */}
-          <div className="absolute inset-0 bg-[#0B1320]/80 sm:bg-[#0B1320]/70 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1320] via-transparent to-[#0B1320]/60" />
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none mix-blend-overlay" />
-        </div>
-        
-        {/* Content Container - Pushed down visually via pt-[140px] to sit naturally under the floating header */}
-        <div className="container-wide relative z-10 pt-[140px] sm:pt-[160px] lg:pt-[180px] pb-16 px-4 sm:px-6 w-full flex flex-col justify-center min-h-full">
+      {/* ════════════════════════════════════════════════════════════════
+          PRODUCTS PAGE HERO — Premium Industrial
+          Background: /hero/products-bg-1.jpg (TMT rebars close-up)
+          Layout: Left dark panel + right photographic steel
+          ════════════════════════════════════════════════════════════════ */}
+      <section
+        className="relative w-full overflow-hidden bg-[#07111F]"
+        style={{ minHeight: 'max(100svh, 700px)' }}
+      >
+        {/* ── Layer 1: Full-bleed background image ── */}
+        <img
+          src="/hero/products-bg-1.jpg"
+          alt="Premium TMT reinforcement steel bars"
+          className="absolute inset-0 w-full h-full object-cover object-[70%_center] sm:object-[65%_center] lg:object-[60%_center]"
+          loading="eager"
+          fetchPriority="high"
+        />
+
+        {/* ── Layer 2: Cinematic dark overlay — keeps steel visible ── */}
+        <div className="absolute inset-0 bg-[#07111F]/35" />
+
+        {/* ── Layer 3: Left-side gradient for panel blending ── */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#07111F]/95 via-[#07111F]/60 to-transparent" />
+
+        {/* ── Layer 4: Subtle vignette ── */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07111F]/50 via-transparent to-[#07111F]/30" />
+
+        {/* ── Content Panel (left-aligned, architecturally integrated) ── */}
+        <div
+          className="relative z-10 w-full lg:w-[58%] xl:w-[55%] flex flex-col justify-center
+                     bg-[#07111F]/80 backdrop-blur-[6px]
+                     lg:rounded-tr-[60px] lg:rounded-br-[60px]
+                     border-r border-white/[0.06] lg:border-r
+                     shadow-[8px_0_30px_rgba(0,0,0,0.4)]
+                     px-6 sm:px-10 md:px-14 lg:px-16 xl:px-20
+                     pt-[120px] sm:pt-[140px] lg:pt-[130px]
+                     pb-12 sm:pb-16 lg:pb-20"
+          style={{ minHeight: 'max(100svh, 700px)' }}
+        >
+          {/* Decorative dot matrix — upper left */}
+          <div className="absolute top-[100px] sm:top-[130px] lg:top-[110px] left-6 sm:left-10 lg:left-16 grid grid-cols-7 gap-[6px] opacity-40 pointer-events-none">
+            {[...Array(21)].map((_, i) => (
+              <div key={`dt-${i}`} className="w-[3px] h-[3px] rounded-full bg-ssc-gold" />
+            ))}
+          </div>
+
+          {/* Decorative dot matrix — lower right */}
+          <div className="absolute bottom-12 sm:bottom-16 right-10 sm:right-14 lg:right-20 grid grid-cols-7 gap-[6px] opacity-40 pointer-events-none">
+            {[...Array(21)].map((_, i) => (
+              <div key={`db-${i}`} className="w-[3px] h-[3px] rounded-full bg-ssc-gold" />
+            ))}
+          </div>
+
+          {/* Animated content wrapper */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-[900px] mx-auto text-center w-full"
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            className="relative z-10 max-w-[620px]"
           >
-            <span className="inline-flex items-center justify-center gap-3 text-[10px] sm:text-micro text-ssc-gold uppercase mb-6 sm:mb-8 tracking-[0.2em] font-bold">
-              <span className="w-8 sm:w-12 h-[1px] bg-ssc-gold/70" />
-              Srinivasa Steel Corporation
-              <span className="w-8 sm:w-12 h-[1px] bg-ssc-gold/70" />
-            </span>
-            
-            <h1 className="text-[38px] sm:text-[56px] lg:text-[76px] font-bold text-white mb-6 sm:mb-8 uppercase leading-[1.05] tracking-tighter drop-shadow-2xl">
-              STEEL PRODUCTS <br />
-              <span className="text-ssc-gold">ENGINEERED FOR PERFORMANCE.</span>
-            </h1>
-            
-            <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-[700px] mx-auto mb-12 sm:mb-16 leading-relaxed font-medium drop-shadow-md px-2">
-              High-performance steel products for construction, infrastructure and industrial requirements.
+            {/* Eyebrow */}
+            <p className="text-[11px] sm:text-xs font-bold text-ssc-gold uppercase tracking-[0.22em] mb-5 sm:mb-6">
+              SRINIVASA STEEL CORPORATION
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full sm:w-auto px-2 sm:px-0">
-              <Button 
+
+            {/* Main headline */}
+            <h1 className="text-[clamp(2.6rem,7vw,5.25rem)] font-[900] leading-[0.96] tracking-tight mb-7 sm:mb-8">
+              <span className="block text-white">STEEL PRODUCTS</span>
+              <span className="block text-ssc-gold">ENGINEERED FOR</span>
+              <span className="block text-ssc-gold">PERFORMANCE.</span>
+            </h1>
+
+            {/* Gold accent divider */}
+            <div className="w-14 sm:w-16 h-[3px] bg-ssc-gold mb-6 sm:mb-7" />
+
+            {/* Description */}
+            <p className="text-[15px] sm:text-[17px] lg:text-[19px] text-white/75 max-w-[480px] leading-[1.7] font-medium mb-10 sm:mb-12">
+              High-performance steel products for construction, infrastructure
+              and industrial requirements.
+            </p>
+
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
+              <Button
                 onClick={() => document.getElementById('product-catalogue')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full sm:w-auto bg-ssc-gold text-ssc-navy hover:bg-white px-8 sm:px-10 py-7 text-[13px] sm:text-[14px] font-bold uppercase tracking-wider rounded-none shadow-[0_10px_30px_-10px_rgba(212,175,55,0.4)] transition-all active:scale-95 border-none"
+                className="w-full sm:w-auto bg-ssc-gold text-[#07111F] hover:bg-white
+                           px-7 sm:px-9 py-[22px] sm:py-6
+                           text-[13px] sm:text-[13px] font-[800] uppercase tracking-[0.12em]
+                           rounded-[4px] shadow-lg
+                           transition-all duration-200 active:scale-[0.97]
+                           border-none group
+                           inline-flex items-center justify-center gap-2.5"
               >
                 VIEW PRODUCTS
+                <ArrowRight size={15} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
               </Button>
+
               <Link to="/contact" search={{ product: "" }} className="w-full sm:w-auto">
-                <Button 
+                <Button
                   variant="outline"
-                  className="w-full border-white/30 bg-black/20 backdrop-blur-md hover:bg-white/10 text-white px-8 sm:px-10 py-7 text-[13px] sm:text-[14px] font-bold uppercase tracking-wider rounded-none transition-all active:scale-95"
+                  className="w-full h-full
+                             border border-white/25 bg-[#07111F]/40 hover:bg-white/[0.06]
+                             text-white
+                             px-7 sm:px-9 py-[22px] sm:py-6
+                             text-[13px] sm:text-[13px] font-[800] uppercase tracking-[0.12em]
+                             rounded-[4px]
+                             transition-all duration-200 active:scale-[0.97]
+                             inline-flex items-center justify-center gap-2.5"
                 >
                   REQUEST A QUOTE
                 </Button>

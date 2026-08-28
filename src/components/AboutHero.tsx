@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import rebarWarehouse from '@/assets/rebar-warehouse.jpg.asset.json';
 
 const categories = ["STEEL", "TMT", "SUPPLY", "DECOILING"];
 
@@ -154,7 +153,7 @@ export const AboutHero = () => {
                 className="relative aspect-[3/2] lg:aspect-[1.2/1] rounded-[12px] lg:rounded-[14px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] border border-ssc-on-dark-primary/10"
               >
                 <img
-                  src={rebarWarehouse.url}
+                  src="/about/about-hero-rods.jpg"
                   alt="Srinivasa Steel Corporation industrial steel warehouse with stacked TMT reinforcement bars"
                   className="w-full h-full object-cover contrast-[1.05]"
                 />
