@@ -11,12 +11,11 @@ export function SmoothScrollController() {
     const lenis = new Lenis({
       autoRaf: true,
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard smooth easing
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       lerp: 0.1,
       smoothWheel: true,
-      syncTouch: true,
+      syncTouch: false, // Let native OS handle touch for perfect momentum scrolling on mobile
       wheelMultiplier: 1.0,
-      touchMultiplier: 2,
     });
 
     return () => {

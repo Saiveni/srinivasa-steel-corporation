@@ -170,14 +170,10 @@ const MobileCarousel = () => {
   const scrollToIndex = (index: number) => {
     if (containerRef.current) {
       const container = containerRef.current;
-      const cardWidth = container.offsetWidth * 0.85;
-      const gap = 16; // 4 * 4 (gap-4)
-      const targetScroll = index * (cardWidth + gap);
-      
-      container.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
+      const cards = Array.from(container.children);
+      if (cards[index]) {
+        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
       setActiveIndex(index);
     }
   };

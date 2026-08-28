@@ -89,24 +89,37 @@ export const WhyChooseUs = () => {
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const totalCards = strengths.length;
 
   const handleScroll = () => {
     if (scrollRef.current) {
       const scrollLeft = scrollRef.current.scrollLeft;
       const width = scrollRef.current.offsetWidth * 0.85;
       const index = Math.round(scrollLeft / width);
-      setActiveIndex(index);
+      if (index !== activeIndex && index >= 0 && index < totalCards) {
+        setActiveIndex(index);
+      }
     }
   };
 
   const scrollTo = (index: number) => {
     if (scrollRef.current) {
-      const width = scrollRef.current.offsetWidth * 0.85;
-      scrollRef.current.scrollTo({
-        left: index * width,
-        behavior: 'smooth'
-      });
+      const cards = Array.from(scrollRef.current.children);
+      if (cards[index]) {
+        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+      setActiveIndex(index);
     }
+  };
+
+  const handlePrev = () => {
+    const nextIndex = Math.max(0, activeIndex - 1);
+    scrollTo(nextIndex);
+  };
+
+  const handleNext = () => {
+    const nextIndex = Math.min(totalCards - 1, activeIndex + 1);
+    scrollTo(nextIndex);
   };
 
   return (
@@ -174,17 +187,46 @@ export const WhyChooseUs = () => {
             <div className="flex-shrink-0 w-4" />
           </div>
           
-          {/* Pagination Dots - Better spacing */}
-          <div className="flex justify-center gap-2 mt-4">
-            {strengths.map((_, idx) => (
+          {/* Navigation Controls */}
+          <div className="flex flex-col items-center gap-6 mt-8">
+            {/* Pagination Dots */}
+            <div className="flex justify-center gap-2">
+              {strengths.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollTo(idx)}
+                  className={`h-2 transition-all duration-300 rounded-full ${
+                    activeIndex === idx ? 'w-6 bg-ssc-gold-dark' : 'w-2 bg-ssc-navy/10'
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+            
+            {/* Arrows */}
+            <div className="flex items-center gap-12">
               <button
-                key={idx}
-                onClick={() => scrollTo(idx)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  activeIndex === idx ? 'w-6 bg-ssc-gold-dark' : 'w-2 bg-ssc-navy/10'
+                onClick={handlePrev}
+                disabled={activeIndex === 0}
+                className={`w-14 h-14 rounded-full flex items-center justify-center border border-ssc-navy/10 bg-white shadow-premium-medium transition-all active:scale-95 ${
+                  activeIndex === 0 ? 'opacity-30' : 'active:border-ssc-gold-dark/50'
                 }`}
-              />
-            ))}
+                aria-label="Previous card"
+              >
+                <ChevronLeft className={`w-6 h-6 ${activeIndex === 0 ? 'text-ssc-navy/20' : 'text-ssc-gold-dark'}`} />
+              </button>
+
+              <button
+                onClick={handleNext}
+                disabled={activeIndex === totalCards - 1}
+                className={`w-14 h-14 rounded-full flex items-center justify-center border border-ssc-navy/10 bg-white shadow-premium-medium transition-all active:scale-95 ${
+                  activeIndex === totalCards - 1 ? 'opacity-30' : 'active:border-ssc-gold-dark/50'
+                }`}
+                aria-label="Next card"
+              >
+                <ChevronRight className={`w-6 h-6 ${activeIndex === totalCards - 1 ? 'text-ssc-navy/20' : 'text-ssc-gold-dark'}`} />
+              </button>
+            </div>
           </div>
         </div>
 
