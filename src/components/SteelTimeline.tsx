@@ -211,12 +211,12 @@ export const SteelTimeline = () => {
           MOBILE VERSION (Vertical Timeline) 
           =======================================
         */}
-        <div className="lg:hidden relative px-4 sm:px-8 mt-12 mb-16 max-w-lg mx-auto">
+        <div className="lg:hidden relative px-3 sm:px-8 mt-10 mb-16 w-full max-w-lg mx-auto">
           
           {/* Main 3D Steel Bar (Vertical) */}
-          <div className="absolute left-[36px] sm:left-[50px] top-0 bottom-0 w-[30px] rounded-[15px] shadow-[15px_0_30px_rgba(0,0,0,0.15)] z-20">
+          <div className="absolute left-[24px] sm:left-[50px] top-0 bottom-0 w-[20px] sm:w-[30px] rounded-[10px] sm:rounded-[15px] shadow-[15px_0_30px_rgba(0,0,0,0.15)] z-20">
             {/* The Steel Surface Gradient (Silver Realistic TMT) */}
-            <div className="absolute inset-0 rounded-[15px] border-x border-white/40" 
+            <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] border-x border-white/40" 
               style={{
                 background: `
                   linear-gradient(90deg, 
@@ -233,7 +233,7 @@ export const SteelTimeline = () => {
               }}
             >
               {/* TMT Bar Ribbing Overlay */}
-              <div className="absolute inset-0 opacity-[0.35] mix-blend-overlay rounded-[15px]" 
+              <div className="absolute inset-0 opacity-[0.35] mix-blend-overlay rounded-[10px] sm:rounded-[15px]" 
                 style={{
                   backgroundImage: `repeating-linear-gradient(-20deg, transparent, transparent 15px, #000 15px, #000 18px, #fff 18px, #fff 21px, transparent 21px)`
                 }}
@@ -241,7 +241,7 @@ export const SteelTimeline = () => {
             </div>
           </div>
           
-          <div className="flex flex-col gap-10 relative z-10 w-full pt-4">
+          <div className="flex flex-col gap-8 sm:gap-10 relative z-10 w-full pt-4">
             {milestones.map((ms, idx) => (
               <motion.div
                 key={idx}
@@ -249,16 +249,16 @@ export const SteelTimeline = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6 }}
-                className="relative flex items-center pl-[80px] sm:pl-[100px]"
+                className="relative flex items-center pl-[56px] sm:pl-[100px] w-full"
               >
                 {/* Horizontal Gold Connectors connecting the vertical steel bar to the card */}
                 {/* Gold Ring wrapped around vertical bar */}
-                <div className="absolute left-[26px] sm:left-[40px] top-1/2 -translate-y-1/2 w-[50px] h-[20px] rounded-[8px] shadow-[inset_2px_0_4px_rgba(255,255,255,0.4),5px_0_10px_rgba(0,0,0,0.5)] z-30" 
+                <div className="absolute left-[14px] sm:left-[40px] top-1/2 -translate-y-1/2 w-[40px] sm:w-[50px] h-[16px] sm:h-[20px] rounded-[6px] sm:rounded-[8px] shadow-[inset_2px_0_4px_rgba(255,255,255,0.4),3px_0_8px_rgba(0,0,0,0.5)] z-30" 
                   style={{
                     background: `linear-gradient(180deg, #8b6914 0%, #d4af37 20%, #ffdf73 50%, #d4af37 80%, #684a05 100%)`
                   }}
                 >
-                  <div className="absolute left-[2px] right-[2px] top-[3px] bottom-[3px] rounded-[5px] shadow-[inset_0_0_6px_rgba(0,0,0,0.7)]" 
+                  <div className="absolute left-[2px] right-[2px] top-[3px] bottom-[3px] rounded-[4px] sm:rounded-[5px] shadow-[inset_0_0_6px_rgba(0,0,0,0.7)]" 
                     style={{
                       background: `linear-gradient(180deg, #684a05 0%, #aa841f 20%, #e6c552 50%, #aa841f 80%, #4a3402 100%)`
                     }}
@@ -266,7 +266,7 @@ export const SteelTimeline = () => {
                 </div>
                 
                 {/* Gold Connector Rod branching right */}
-                <div className="absolute left-[70px] sm:left-[84px] top-1/2 -translate-y-1/2 w-[16px] sm:w-[22px] h-[5px] z-10 shadow-[2px_2px_4px_rgba(0,0,0,0.3)]" 
+                <div className="absolute left-[52px] sm:left-[84px] top-1/2 -translate-y-1/2 w-[12px] sm:w-[22px] h-[4px] sm:h-[5px] z-10 shadow-[2px_2px_4px_rgba(0,0,0,0.3)]" 
                   style={{
                     background: `linear-gradient(180deg, #ffdf73 0%, #d4af37 50%, #684a05 100%)`,
                     borderRadius: '0 2px 2px 0'
@@ -274,30 +274,30 @@ export const SteelTimeline = () => {
                 />
                 
                 {/* The Card */}
-                <div className="w-full bg-[#111318] border-[1px] border-ssc-gold/30 rounded-[14px] shadow-[0_15px_30px_rgba(0,0,0,0.15)] p-5 sm:p-6 flex flex-row items-center gap-5 relative overflow-hidden">
+                <div className="w-full bg-[#111318] border-[1px] border-ssc-gold/30 rounded-[12px] sm:rounded-[14px] shadow-[0_15px_30px_rgba(0,0,0,0.15)] p-4 sm:p-6 flex flex-row items-center gap-3 sm:gap-5 relative overflow-hidden">
                   {/* Subtle Metallic Highlights */}
                   <div className="absolute top-0 left-0 w-1 bg-ssc-gold opacity-60 shadow-[0_0_10px_#d4af37] bottom-0" />
                   <div className="absolute inset-0 bg-gradient-to-r from-white/[0.03] to-transparent pointer-events-none" />
 
                   {/* Left Side: Number & Icon */}
-                  <div className="flex flex-col items-center shrink-0 w-[50px]">
-                    <span className="text-[12px] font-black text-ssc-gold tracking-widest mb-2">
+                  <div className="flex flex-col items-center shrink-0 w-[42px] sm:w-[50px]">
+                    <span className="text-[11px] sm:text-[12px] font-black text-ssc-gold tracking-widest mb-1.5 sm:mb-2">
                       {ms.num}
                     </span>
                     <div className="text-ssc-gold opacity-90">
-                      <ms.icon size={28} strokeWidth={1.5} />
+                      <ms.icon className="w-[24px] h-[24px] sm:w-[28px] sm:h-[28px]" strokeWidth={1.5} />
                     </div>
                   </div>
 
                   {/* Right Side: Content */}
-                  <div className="flex flex-col flex-1 border-l border-white/10 pl-5">
-                    <h3 className="text-white text-[18px] sm:text-[20px] font-bold mb-1 tracking-wider leading-none">
+                  <div className="flex flex-col flex-1 border-l border-white/10 pl-4 sm:pl-5 min-w-0">
+                    <h3 className="text-white text-[16px] sm:text-[20px] font-bold mb-1 tracking-wider leading-none truncate">
                       {ms.year}
                     </h3>
-                    <h4 className="text-ssc-gold text-[9px] sm:text-[10px] font-black tracking-[0.1em] mb-2 uppercase">
+                    <h4 className="text-ssc-gold text-[8px] sm:text-[10px] font-black tracking-[0.1em] mb-1.5 sm:mb-2 uppercase truncate w-full">
                       {ms.title}
                     </h4>
-                    <p className="text-[#a1a1a1] text-[12px] leading-relaxed line-clamp-3">
+                    <p className="text-[#a1a1a1] text-[11px] sm:text-[12px] leading-relaxed line-clamp-3">
                       {ms.description}
                     </p>
                   </div>

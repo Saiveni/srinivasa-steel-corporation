@@ -201,11 +201,11 @@ const MobileCarousel = () => {
   };
 
   return (
-    <div className="lg:hidden w-full overflow-hidden mt-10">
+    <div className="lg:hidden w-full mt-10">
       <div 
         ref={containerRef}
         onScroll={onScroll}
-        className="flex gap-4 px-6 overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth"
+        className="flex gap-4 px-6 overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar scroll-smooth pb-6 pt-2 touch-pan-x"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {businessAreas.map((area, index) => (

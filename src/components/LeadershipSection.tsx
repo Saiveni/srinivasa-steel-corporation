@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { User, MoveRight } from 'lucide-react';
 
 const leaders = [
   {
     name: "M.S.V. BHASKAR",
     designation: "MANAGING PARTNER",
-    description: "Visionary leader driving the strategic growth and industrial excellence of Srinivasa Steel Corporation since inception.",
+    description: "Visionary leader driving the strategic growth and industrial excellence of Srinivasa Steel Corporation.",
     image: "/__l5e/assets-v1/2ed039f3-80e9-44e2-86ee-359f130097a9/leader-bhaskar.png"
   },
   {
@@ -33,40 +34,36 @@ const LeaderCard = ({ leader, index }: { leader: typeof leaders[0], index: numbe
         duration: 0.8, 
         ease: [0.21, 1, 0.36, 1] 
       }}
-      className="relative group w-full"
+      className="relative group w-full h-full"
     >
       {/* 3D Animated Card */}
       <motion.div 
-        whileHover={{ rotateY: 8, rotateX: -5, translateZ: 20 }}
+        whileHover={{ translateY: -5 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="relative bg-[#1C2533] rounded-[16px] p-8 border border-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col items-center text-center h-full z-10 overflow-hidden"
-        style={{ transformStyle: 'preserve-3d' }}
+        className="relative bg-[#131A26] rounded-[16px] p-8 border-t border-l border-r border-white/5 border-b-[3px] border-b-ssc-gold flex flex-col items-center text-center h-full z-10 overflow-hidden"
       >
         {/* Card Surface Highlight */}
         <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.02] to-transparent pointer-events-none" />
         
-        {/* Net/Square Image Implementation */}
-        <div className="relative w-40 h-40 mb-8 overflow-hidden rounded-[12px] shadow-2xl border border-white/10 group-hover:scale-105 transition-transform duration-700">
-          <img 
-            src={leader.image} 
-            alt={leader.name} 
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-          />
-          {/* Subtle light sweep */}
-          <motion.div 
-             animate={{ x: ['-100%', '200%'] }}
-             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-             className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
-           />
+        {/* User Icon Placeholder */}
+        <div className="relative w-[84px] h-[84px] mb-8 flex items-center justify-center rounded-full border border-white/20">
+          <div className="absolute inset-0 rounded-full border-t-[2px] border-r-[2px] border-transparent border-t-ssc-gold transform -rotate-[60deg]" />
+          <User className="w-8 h-8 text-white/80" strokeWidth={1.5} />
         </div>
 
         {/* Text Content */}
-        <div className="relative z-10 flex flex-col items-center flex-1">
-          <h3 className="text-[20px] lg:text-[22px] text-white mb-2 font-bold tracking-tight uppercase">
+        <div className="relative z-10 flex flex-col items-center flex-1 w-full">
+          <h3 className="text-[18px] lg:text-[20px] text-white mb-4 font-bold tracking-tight uppercase">
             {leader.name}
           </h3>
           
-          <div className="inline-block px-4 py-1.5 bg-ssc-gold/10 border border-ssc-gold/20 rounded-full mb-6">
+          <div className="flex items-center w-[85%] mb-6">
+            <div className="flex-1 h-[1px] bg-white/20"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-ssc-gold mx-3 shadow-[0_0_8px_rgba(212,175,55,0.6)]"></div>
+            <div className="flex-1 h-[1px] bg-white/20"></div>
+          </div>
+
+          <div className="inline-block px-8 py-1.5 border border-ssc-gold/60 rounded-[100px] mb-6 hover:bg-ssc-gold/10 transition-colors">
             <span className="text-[11px] text-ssc-gold font-bold tracking-[0.1em] uppercase">
               {leader.designation}
             </span>
@@ -75,15 +72,6 @@ const LeaderCard = ({ leader, index }: { leader: typeof leaders[0], index: numbe
           <p className="text-[14px] text-ssc-gray-muted leading-relaxed max-w-[280px]">
             {leader.description}
           </p>
-        </div>
-
-        {/* Bottom Detail */}
-        <div className="mt-8 pt-6 border-t border-white/5 w-full">
-          <div className="flex justify-center gap-2">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="w-1 h-1 rounded-full bg-ssc-gold/30" />
-            ))}
-          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -128,10 +116,23 @@ export const LeadershipSection = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-12 max-w-[1200px] mx-auto relative items-stretch px-6 md:px-0 py-8">
+        <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-12 max-w-[1200px] mx-auto relative items-stretch px-4 md:px-0 py-8 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {leaders.map((leader, idx) => (
-            <LeaderCard key={leader.name} leader={leader} index={idx} />
+            <div key={leader.name} className="w-[80vw] sm:w-[350px] md:w-auto snap-center shrink-0">
+              <LeaderCard leader={leader} index={idx} />
+            </div>
           ))}
+        </div>
+        
+        {/* Mobile Swipe Hint */}
+        <div className="md:hidden flex items-center justify-center gap-2 mt-2 mb-12 opacity-80">
+          <span className="text-white/60 text-[10px] uppercase tracking-[0.2em] font-bold">Swipe to view</span>
+          <motion.div
+            animate={{ x: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          >
+            <MoveRight className="w-4 h-4 text-ssc-gold" />
+          </motion.div>
         </div>
         
         <motion.div 

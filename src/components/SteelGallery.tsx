@@ -174,7 +174,7 @@ export const SteelGallery = ({ isHomePage = false }: { isHomePage?: boolean }) =
       <div className="container-wide pt-12 sm:pt-16">
         
         {/* Premium Category Navigation */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
+        <div className="grid grid-cols-2 lg:flex lg:flex-wrap lg:justify-center gap-2 sm:gap-4 mb-10 sm:mb-16 px-1 sm:px-0">
           {categoriesMap.map((cat) => {
             const Icon = cat.icon;
             const isActive = filter === cat.id;
@@ -182,14 +182,14 @@ export const SteelGallery = ({ isHomePage = false }: { isHomePage?: boolean }) =
               <button
                 key={cat.id}
                 onClick={() => setFilter(cat.id)}
-                className={`flex items-center gap-3 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full transition-all duration-300 font-bold text-[10px] sm:text-[11px] uppercase tracking-widest border ${
+                className={`flex items-center justify-center gap-1.5 sm:gap-3 px-2 sm:px-6 py-3 sm:py-3.5 rounded-[12px] sm:rounded-full transition-all duration-300 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider sm:tracking-widest border w-full lg:w-auto ${
                   isActive 
                     ? "bg-ssc-navy text-white border-ssc-navy shadow-lg" 
                     : "bg-white text-ssc-navy border-black/10 hover:border-ssc-navy/30 hover:bg-[#F8FAFC]"
                 }`}
               >
-                <Icon size={16} className={isActive ? "text-ssc-gold" : "text-ssc-navy/60"} />
-                {cat.label}
+                <Icon size={14} className={`shrink-0 ${isActive ? "text-ssc-gold" : "text-ssc-navy/60"} sm:w-[16px] sm:h-[16px]`} />
+                <span className="truncate">{cat.label}</span>
               </button>
             )
           })}
@@ -305,7 +305,7 @@ export const SteelGallery = ({ isHomePage = false }: { isHomePage?: boolean }) =
         PREMIUM CINEMATIC HERO
         ========================================================
       */}
-      <section className="relative w-full pt-[90px] sm:pt-[100px] pb-32 sm:pb-48 lg:pb-56 overflow-hidden">
+      <section className="relative w-full pt-[90px] sm:pt-[110px] lg:pt-[180px] pb-32 sm:pb-48 lg:pb-56 overflow-hidden">
         {/* Background Image Container */}
         <div className="absolute inset-0 z-0">
           <img 

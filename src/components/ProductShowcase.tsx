@@ -216,11 +216,11 @@ const ProductShowcase = () => {
         </div>
         
         {/* Premium Mobile Slider (Hidden on Desktop) */}
-        <div className="lg:hidden w-full overflow-hidden mt-6 -mx-4 px-4">
+        <div className="lg:hidden w-full mt-6 -mx-4 px-4">
           <div 
             ref={containerRef}
             onScroll={onScroll}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth pb-4"
+            className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar scroll-smooth pb-6 pt-2 touch-pan-x"
             style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {products.map((product, index) => (

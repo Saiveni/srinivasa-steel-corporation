@@ -280,7 +280,7 @@ function ContactPage() {
               maxWidth: '100%'
             }}
           >
-            <img src="/hero/contact-hero-map-mobile.png" alt="Srinivasa Steel Locations Map" className="w-full h-full object-contain object-bottom" />
+            <img src="/hero/contact-hero-map-mobile.jpg" alt="Srinivasa Steel Locations Map" className="w-full h-full object-contain object-bottom" />
             
             {/* Interactive Overlay: Vijayawada (Mobile) */}
             <div 
